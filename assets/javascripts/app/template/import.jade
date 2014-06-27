@@ -1,0 +1,49 @@
+.container
+
+  .row
+    .col-xs-12.page-header
+  
+      h3.pull-left(style='margin:0 0 15px') Customer Account import
+
+  .row
+    .col-xs-6
+      form(name='importForm')
+        .form-group
+          select.form-control(ng-model='selectedCarrier', ng-options='c._id as c.name for c in carriers')
+        .form-group
+          input.form-control(type='url', ng-model='url', placeholder='Google Doc Url', required)
+        button.btn(ng-disabled='importForm.$invalid', ng-class="{ 'btn-default disabled':loading, 'btn-warning':!loading }", ng-click='preview()')
+          span(ng-hide='loading') Preview
+          span(ng-show='loading') .. loading
+        button.btn.btn-success(ng-click='save()', ng-show='accounts', style='margin-left:10px') Save
+        p.help-block(ng-show='accounts')
+          | If data below is correct click 'Save'.
+          br
+          | Don't worry about the order or formatting.
+
+  .row(ng-show='duplicateAccounts')
+    .col-xs-12
+      .panel.panel-danger(style='margin-top:10px')
+        .panel-heading Duplicate Emails
+        .panel-body: p Each account must have a unique email.  Please edit/delete the following rows in your spreadsheet.
+        table.table.table-condensed
+          thead
+            tr
+              th(ng-repeat='key in keys') {{ key }}
+
+          tbody
+            tr(ng-repeat='account in duplicateAccounts')
+              td(ng-repeat='key in keys') {{ account[key] }}
+
+
+  .row(ng-show='accounts')
+    .col-xs-12
+
+      table.table.table-condensed
+        thead
+          tr
+            th(ng-repeat='key in keys') {{ key }}
+
+        tbody
+          tr(ng-repeat='account in accounts')
+            td(ng-repeat='key in keys') {{ account[key] }}

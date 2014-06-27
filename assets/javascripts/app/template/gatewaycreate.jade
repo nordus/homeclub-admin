@@ -1,0 +1,17 @@
+.container
+  .row
+    .col-xs-12
+      .col-xs-12.page-header
+        h3.pull-left(style='margin:0 0 15px')
+          a(href='#/customer-accounts/{{ account._id }}') {{ account.name.first }} {{ account.name.last }}
+          |  /
+          | Add Gateway
+
+  form.form-horizontal(name='newGatewayForm', ng-submit='save()')
+    .form-group
+      .col-xs-6(ng-class="{'has-error':dupes||newGatewayForm.macAddress.$error.pattern}")
+        input.form-control(name='macAddress', ng-pattern='/^[a-f|A-F|0-9]{12}$/', ng-change='dupeCheck(newGatewayForm)', ng-model='gateway._id', placeholder='MAC Address (used as ID)', required)
+        label.control-label(ng-show='dupes') duplicate MAC Address
+        label.control-label(ng-show='newGatewayForm.macAddress.$error.pattern') invalid MAC address
+
+    button.btn.btn-warning(type='submit', ng-disabled='dupes || newGatewayForm.$invalid') Save

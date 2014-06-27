@@ -1,0 +1,22 @@
+.container
+  .row
+    .col-xs-12.page-header
+
+      h3.pull-left(style='margin:0 0 15px')
+        a(href='#/users') Users
+        |  /
+        | {{ user.email }}
+
+      form.navbar-form.navbar-right(style='margin:0')
+        a.btn.btn-default(ng-show='user.roles.customerAccount', href="#/customer-accounts/{{ user.roles.customerAccount }}") View Customer Account
+        a.btn.btn-success(ng-hide='user.roles.customerAccount', href="#/users/{{ user._id }}/customer-account/create") Add Customer Account
+  
+        a.btn.btn-default(ng-show='user.roles.homeClubAdmin', href="#/home-club-admins/{{ user.roles.homeClubAdmin }}") View HomeClub Admin
+        a.btn.btn-success(ng-hide='user.roles.homeClubAdmin', href="#/users/{{ user._id }}/home-club-admin/create") Add HomeClub Admin
+  
+        a.btn.btn-default(ng-show='user.roles.carrierAdmin', href="#/carrier-admins/{{ user.roles.carrierAdmin }}") View Carrier Admin
+        a.btn.btn-success(ng-hide='user.roles.carrierAdmin', href="#/users/{{ user._id }}/carrier-admin/create") Add Carrier Admin
+
+  .row
+    .col-xs-12
+      pre {{ user | json }}

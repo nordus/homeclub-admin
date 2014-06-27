@@ -1,0 +1,11 @@
+.container
+  .row
+    .col-xs-12.page-header
+      h3(style='margin:0 0 15px')
+        a(href='#/carriers') Carriers
+        |  /
+        | {{ carrier.name }}
+
+  .row
+    .col-xs-12
+      pre {{ carrier | json }}

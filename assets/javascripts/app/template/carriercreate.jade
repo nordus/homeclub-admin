@@ -1,0 +1,40 @@
+.container
+  .row
+    .col-xs-12.page-header
+
+      h3.pull-left(style='margin:0 0 15px') Add new Carrier
+
+  .row
+    .col-xs-6
+
+      form.form-horizontal
+        .form-group
+          .col-xs-6
+            input.form-control(placeholder='Carrier name', ng-model='carrier.name', type='text')
+          .col-xs-6
+            .input-group
+              .input-group-addon #
+              input.form-control(placeholder='Phone', ng-model='carrier.phone', type='text')
+      
+      .page-header Address
+      
+      form.form-horizontal
+        .form-group
+          .col-xs-3
+            input.form-control(placeholder='Street #', ng-model='carrier.houseNumber', type='text')
+          .col-xs-9
+            input.form-control(placeholder='Street name', ng-model='carrier.streetName', type='text')
+        .form-group
+          .col-xs-6
+            input.form-control(placeholder='City', ng-model='carrier.city', type='text')
+          .col-xs-3
+            input.form-control(placeholder='State', ng-model='carrier.state', type='text')
+          .col-xs-3
+            input.form-control(placeholder='ZIP', ng-model='carrier.zip', type='text')
+ 
+    
+  .row(style='margin-top:25px')
+    .col-xs-12
+      .form-group
+        .col-xs-2.col-xs-offset-4.ac
+          button.btn.btn-warning.btn-block(ng-click='save()') Save

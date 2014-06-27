@@ -1,0 +1,16 @@
+.container
+  .row
+    .col-xs-12.page-header
+
+      h3.pull-left(style='margin:0 0 15px')
+        a(href='{{ breadcrumb.link }}') {{ breadcrumb.title }}
+        |  /
+        | {{ admin.name.first }} {{ admin.name.last }}
+
+      form.navbar-form.navbar-right(style='margin:0')
+        a.btn.btn-default(ng-if='admin.carrier', href="#/carriers/{{ admin.carrier }}") View Carrier
+        a.btn.btn-default(href="#/users/{{ admin.user }}") View User
+
+  .row
+    .col-xs-12
+      pre {{ admin | json }}

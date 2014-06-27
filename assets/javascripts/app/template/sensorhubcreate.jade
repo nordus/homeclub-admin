@@ -1,0 +1,29 @@
+.container
+  .row
+    .col-xs-12
+      .col-xs-12.page-header
+        h3.pull-left(style='margin:0 0 15px')
+          a(href='#/customer-accounts/{{ account._id }}/gateways/{{ gateway._id }}') Gateway {{ gateway._id }}
+          |  /
+          | Add Sensor Hub
+
+  .row
+    .col-xs-3
+      form.form-horizontal(name='newSensorHubForm', ng-submit='save()')
+        .form-group
+          .col-xs-12(ng-class="{'has-error':dupes||newSensorHubForm.macAddress.$error.pattern}")
+            input.form-control(name='macAddress', ng-pattern='/^[a-f|A-F|0-9]{12}$/', ng-change='dupeCheck(newSensorHubForm)', ng-model='sensorHub._id', placeholder='MAC Address (used as ID)', required)
+            label.control-label(ng-show='dupes') duplicate MAC Address
+            label.control-label(ng-show='newSensorHubForm.macAddress.$error.pattern') invalid MAC address
+
+    .col-xs-3
+      .form-group
+        label.col-xs-3.control-label Type
+        .col-xs-9
+          select.form-control(ng-model='sensorHub.sensorHubType', ng-options='sensorHubTypeId as sensorHubTypeName for (sensorHubTypeId, sensorHubTypeName) in meta.sensorHubTypes')
+
+  .row(style='margin-top:25px')
+    .col-xs-12
+      .form-group
+        .col-xs-2.col-xs-offset-4.ac
+          button.btn.btn-warning.btn-block(ng-click='save()', ng-disabled='dupes || newSensorHubForm.$invalid') Save

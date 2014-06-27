@@ -1,0 +1,23 @@
+.container
+
+  include _filtercontrolswithcarrierselect
+
+  .row
+    .col-sm-12
+
+      table.table
+        thead
+          tr
+            th First
+            th Last
+            th City
+            th State
+            th
+
+        tbody
+          tr(ng-repeat='account in accounts | filter:selectedCarrier | filter:searchText | orderBy:sortOrder')
+            td: a(href='#/customer-accounts/{{ account._id }}') {{ account.name.first }}
+            td {{ account.name.last }}
+            td {{ account.city }}
+            td {{ account.state }}
+            td: a: i.icon-trashcan

@@ -1,0 +1,21 @@
+.container
+  .row
+    .col-xs-12
+      table.table
+        thead
+          tr
+            th Email
+            th Created
+            th Roles
+            th
+
+        tbody
+          tr(ng-repeat='user in users')
+            td
+              a(href='#/users/{{ user._id }}') {{ user.email }}
+            td {{ user.createdAt | date:'MMM d, yyyy' }}
+            td
+              .btn-group(ng-repeat='(roleKey, roleValue) in user.roles')
+                a.btn.btn-xs.btn-default(href='#/{{ roleKey | dasherize }}s/{{ roleValue }}') {{ roleKey }}
+                a.btn.btn-xs.btn-default(ng-click='roleMgr.deleteRole(user._id, roleKey, roleValue)'): i.icon-trashcan
+            td: a(title='Delete {{ user.email }}'): i.icon-trashcan

@@ -1,0 +1,24 @@
+.container
+
+  include _filtercontrols
+
+  .row
+    .col-xs-12
+
+      table.table
+        thead
+          tr
+            th Name
+            th City
+            th State
+            th
+
+        tbody
+          tr(ng-repeat='carrier in carriers | filter:searchText | orderBy:sortOrder')
+            td
+              a(href='#/carriers/{{ carrier._id }}') {{ carrier.name }}
+            td {{ carrier.city }}
+            td {{ carrier.state }}
+            td
+              a.btn.btn-xs.btn-default(href='#/carrier-admins?carrier={{ carrier._id }}') Carrier Admins
+              a.btn.btn-xs.btn-default(href='#/customer-accounts?carrier={{ carrier._id }}') Customer Accounts

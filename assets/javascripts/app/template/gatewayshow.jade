@@ -1,0 +1,15 @@
+.container
+  .row
+    .col-xs-12.page-header
+
+      h3.pull-left(style='margin:0 0 15px')
+        a(href='#/customer-accounts/{{ account._id }}') {{ account.name.first }} {{ account.name.last }}
+        |  /
+        | Gateway {{ gateway._id }}
+
+      form.navbar-form.navbar-right(style='margin:0')
+        a.btn.btn-success(href='#/customer-accounts/{{ account._id }}/gateways/{{ gateway._id }}/sensor-hubs/create') Add Sensor Hub
+
+  .row
+    .col-xs-12
+      pre {{ gateway | json }}

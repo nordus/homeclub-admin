@@ -1,0 +1,21 @@
+.container
+  .row
+    .col-xs-12.page-header
+
+      h3.pull-left(style='margin:0 0 15px')
+        a(href='#/customer-accounts') Accounts
+        |  /
+        | {{ account.name.first }} {{ account.name.last }}
+  
+      form.navbar-form.navbar-right(style='margin:0')
+        a.btn.btn-default(href="#/users/{{ account.user }}") View User
+        .btn-group(ng-repeat='gateway in account.gateways')
+          a.btn.btn-default(href='#/customer-accounts/{{ account._id }}/gateways/{{ gateway }}')
+            | View Gateway 
+            small (..{{ gateway.substr(-4) }})
+          a.btn.btn-default(title='Delete Gateway {{ gateway }}'): i.icon-trashcan
+        a.btn.btn-success(href='#/customer-accounts/{{ account._id }}/gateways/create') Add Gateway
+
+  .row
+    .col-xs-12
+      pre {{ account | json }}

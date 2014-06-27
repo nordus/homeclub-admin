@@ -1,0 +1,35 @@
+nav.navbar.navbar-default(ng-controller='nav')
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle(data-toggle='collapse', data-target='#nav')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    #nav.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-left
+        li(ng-class="{active: isActive('/carriers')}"): a(href='#/carriers') Carriers
+        li(ng-class="{active: isActive('/carrier-admins')}"): a(href='#/carrier-admins') Carrier Admins
+        li(ng-class="{active: isActive('/customer-accounts')}"): a(href='#/customer-accounts') Customer Accounts
+        li(ng-class="{active: isActive('/home-club-admins')}"): a(href='#/home-club-admins') HomeClub Admins
+        li(ng-class="{active: isActive('/users')}"): a(href='#/users') Users
+
+      ul.nav.navbar-nav.navbar-right
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown')
+            | Add new
+            b.caret
+          ul.dropdown-menu
+            li: a(href='#/carriers/create') Carrier
+            li: a(href='#/customer-accounts/create') Customer Account
+            li: a(href='#/home-club-admins/create') HomeClub Admin
+            li: a(href='#/carrier-admins/create') Carrier Admin
+            li.divider
+            li(ng-class="{active: isActive('/import')}"): a(href='#/import') Import
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown')
+            | {{ currentUser.name.first || currentUser.user.email }}
+            b.caret
+          ul.dropdown-menu
+            li: a(href='/consumer') View consumer
+            li.divider
+            li: a Logout

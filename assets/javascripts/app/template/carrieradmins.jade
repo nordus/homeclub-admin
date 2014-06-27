@@ -1,0 +1,19 @@
+.container
+
+  include _filtercontrolswithcarrierselect
+
+  .row
+    .col-sm-12
+
+      table.table
+        thead
+          tr
+            th First
+            th Last
+            th
+
+        tbody
+          tr(ng-repeat='admin in admins | filter:selectedCarrier | filter:searchText | orderBy:sortOrder')
+            td: a(ng-click='show(admin._id)') {{ admin.name.first }}
+            td {{ admin.name.last }}
+            td: a: i.icon-trashcan
