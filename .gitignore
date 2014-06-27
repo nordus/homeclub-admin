@@ -9,6 +9,10 @@
 /.node_modules
 /node_modules
 
+# Ignore Bower assets
+/assets/javascripts/vendor
+/assets/stylesheets/vendor
+
 # Ignore all logfiles and tempfiles.
 logs
 *.log
