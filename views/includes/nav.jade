@@ -7,6 +7,7 @@ nav.navbar.navbar-default(ng-controller='nav')
         span.icon-bar
     #nav.collapse.navbar-collapse
       ul.nav.navbar-nav.navbar-left
+        li(ng-class="{active: isActive('/dashboard')}"): a(href='#/dashboard') Dashboard
         li(ng-class="{active: isActive('/carriers')}"): a(href='#/carriers') Carriers
         li(ng-class="{active: isActive('/carrier-admins')}"): a(href='#/carrier-admins') Carrier Admins
         li(ng-class="{active: isActive('/customer-accounts')}"): a(href='#/customer-accounts') Customer Accounts
@@ -30,6 +31,6 @@ nav.navbar.navbar-default(ng-controller='nav')
             | {{ currentUser.name.first || currentUser.user.email }}
             b.caret
           ul.dropdown-menu
-            li: a(href='/consumer') View consumer
-            li.divider
-            li: a Logout
+            li: a(ng-show='currentUser.user.roles.customerAccount', href='/consumer') View consumer
+            li.divider(ng-show='currentUser.user.roles.customerAccount')
+            li: a(ng-click='logout()') Logout

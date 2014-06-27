@@ -11,6 +11,7 @@ require ['admin-requirejs-config'], ->
     'c/carriershow'
     'c/customeraccounts'
     'c/customeraccountshow'
+    'c/dashboard'
     'c/gatewaycreate'
     'c/gatewayshow'
     'c/homeclubadmins'
@@ -40,8 +41,9 @@ require ['admin-requirejs-config'], ->
         ]
 
       $routeProvider
-        .when '/',
-          template    : templates.admin
+        .when '/dashboard',
+          controller: 'dashboard'
+          template    : templates.dashboard
           resolve: auth
 
         .when '/carrier-admins/:id',
@@ -120,7 +122,7 @@ require ['admin-requirejs-config'], ->
           resolve: auth
 
         .otherwise
-          redirectTo  : '/'
+          redirectTo  : '/dashboard'
 
     app.config ['$routeProvider', '$httpProvider', rp]
 
