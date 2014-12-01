@@ -47,7 +47,8 @@ exports.startServer = (config, callback) ->
     cachebust: if process.env.NODE_ENV isnt "production" then "?b=#{(new Date()).getTime()}" else ''
 
   router = express.Router()
-  router.route('*').get (req, res) -> res.render 'index', viewOptions
+  router.route('/homeclub').get (req, res) -> res.render 'homeclub', viewOptions
+  router.route('/carrier').get (req, res) -> res.render 'carrier', viewOptions
   app.use router
 
   if callback
