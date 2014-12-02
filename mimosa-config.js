@@ -11,12 +11,25 @@ exports.config = {
     "bower",
     "coffeescript",
     "less",
-    "jade"
+    "jade",
+    "web-package"
   ],
-  "template": {
-    "outputFileName": "javascripts/admin-templates"
+  "bower": {
+    "copy": {
+      "unknownMainFullCopy": true
+    }
   },
-  require: {
-    commonConfig: 'admin-requirejs-config'
-  }
+  template: {
+    output: [{
+      folders:["javascripts/carrier/templates"],
+      outputFileName: "javascripts/carrier-templates"
+    },
+      {
+        folders:["javascripts/homeclub/templates"],
+        outputFileName: "javascripts/homeclub-templates"
+      }]
+  }//,
+  // require: {
+  //   commonConfig: 'admin-requirejs-config'
+  // }
 }

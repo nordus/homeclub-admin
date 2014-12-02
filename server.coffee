@@ -48,7 +48,7 @@ exports.startServer = (config, callback) ->
 
   router = express.Router()
   router.route('/homeclub').get (req, res) -> res.render 'homeclub', viewOptions
-  router.route('/carrier').get (req, res) -> res.render 'carrier', viewOptions
+  router.route('/carrier').get (req, res) -> res.render 'carrier/carrier', viewOptions
   app.use router
 
   if callback

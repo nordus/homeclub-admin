@@ -1,0 +1,10 @@
+.row
+  .col-xs-12.page-header
+
+    h3.pull-left(style='margin:0 0 15px') {{ breadcrumb.title }}
+
+    form.navbar-form.navbar-right(style='margin:0')
+      .form-group
+        input.form-control(ng-model='searchText', placeholder='Search')
+      .form-group(style='margin-left:7px')
+        select.form-control(ng-model='sortOrder', ng-options='option.value as option.title for option in sortOptions')

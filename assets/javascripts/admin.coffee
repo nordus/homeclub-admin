@@ -3,7 +3,7 @@ require ['admin-requirejs-config'], ->
   require [
     'ng'
     'admin-app'
-    'admin-templates'
+    'homeclub-templates'
     'c/carrieradmins'
     'c/carrieradminshow'
     'c/carriercreate'

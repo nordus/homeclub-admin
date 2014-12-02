@@ -1,0 +1,42 @@
+.container
+
+  .row
+    .col-xs-12.page-header
+  
+      h3.pull-left(style='margin:0 0 15px') HomeBase Alerts
+  
+      form.navbar-form.navbar-right(style='margin:0')
+        .form-group
+          select.form-control(ng-model='searchParams.start')
+            option(value="1 hour ago") 1 hour ago to now
+            option(value='1 day ago') 1 day ago to now
+            option(value='1 week ago') 1 week ago to now
+            option(value='30 days ago') 30 days ago to now
+            option(value='July 1') ALL
+
+
+  .row
+    .col-xs-12(style='height:205px;overflow:auto')
+      table.table
+        tr
+          th Time
+          th MAC
+          th Gateway Batt
+          th Gateway Event Code
+          th RSSI
+        tr(ng-repeat='searchResult in searchResults')
+          td {{ searchResult.message.timestamp | date:'MMM dd, h:mm a' }}
+          td {{ searchResult.message.macAddress }}
+          td {{ searchResult.message.gatewayBattery }}
+          td {{ searchResult.message.gatewayEventCode }}
+          td {{ searchResult.message.rssi }}
+
+  .row
+    .col-xs-12(style='margin-top:10px')
+      .pull-right
+        a.btn.btn-default(ng-show='searchParams.offset > 0', ng-click="searchParams.offset = searchParams.offset-20") &larr; Previous
+        a.btn.btn-default(ng-click="searchParams.offset = searchParams.offset+20") Next &rarr;
+
+  .row(style='margin-top:25px')
+    .col-xs-12
+      a.btn.btn-primary(target='_', ng-href='{{ downloadUrl() }}') Download CSV

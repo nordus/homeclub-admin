@@ -1,0 +1,12 @@
+.container
+  .row
+    .col-xs-12.page-header
+
+      h3.pull-left(style='margin:0 0 15px')
+        a(href='{{ breadcrumb.link }}') {{ breadcrumb.title }}
+        |  /
+        | {{ admin.name.first }} {{ admin.name.last }}
+
+  .row
+    .col-xs-12
+      pre {{ admin | json }}

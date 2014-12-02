@@ -1,0 +1,41 @@
+nav.navbar.navbar-default(ng-controller='nav')
+  .container-fluid
+    .navbar-header
+      button.navbar-toggle(data-toggle='collapse', data-target='#nav')
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+      a.navbar-brand {{ currentUser.carrier.name }}
+    #nav.collapse.navbar-collapse
+      ul.nav.navbar-nav.navbar-left
+        li(ng-class="{active: isActive('/dashboard')}"): a(href='#/dashboard') Dashboard
+        li(ng-class="{active: isActive('/carrier-admins')}"): a(href='#/carrier-admins') Admins
+        li(ng-class="{active: isActive('/customer-accounts')}"): a(href='#/customer-accounts') Customers
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown')
+            | Reports
+            b.caret
+          ul.dropdown-menu
+            li: a(href='#/reports/5') Sensor Readings
+            li: a(href='#/reports/4') Sensor Alerts
+            li: a(href='#/reports/2') Network Hub Alerts
+        li(ng-class="{active: isActive('/connectivity')}"): a(href='#/connectivity') Connectivity
+
+      ul.nav.navbar-nav.navbar-right
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown')
+            | Add new
+            b.caret
+          ul.dropdown-menu
+            // li: a Customer
+            li: a Admin
+            // li.divider
+            // li(ng-class="{active: isActive('/import')}"): a(href='#/import') Import
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown')
+            | {{ currentUser.name.first || currentUser.user.email }}
+            b.caret
+          ul.dropdown-menu
+            li: a(ng-show='currentUser.user.roles.customerAccount', href='/consumer') View consumer
+            li.divider(ng-show='currentUser.user.roles.customerAccount')
+            li: a(ng-click='logout()') Logout

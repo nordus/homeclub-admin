@@ -1,0 +1,125 @@
+.container
+
+  .row
+    .col-xs-12.page-header
+  
+      h3.pull-left(style='margin:0 0 15px') Sensor Readings
+  
+      form.navbar-form.navbar-right(style='margin:0')
+        .form-group
+          select.form-control(ng-model='searchParams.start')
+            option(value="1 hour ago") 1 hour ago to now
+            option(value='1 day ago') 1 day ago to now
+            option(value='1 week ago') 1 week ago to now
+            option(value='30 days ago') 30 days ago to now
+            option(value='July 1') ALL
+
+  .row
+    .col-xs-4
+      .panel.panel-danger
+        .panel-heading
+          i.icon-temperature
+          |  Temperature
+          small  ({{ statResults.sensorHubData1.count | number }} readings)
+        table.table
+          tr
+            th
+            th mean
+            th max
+            th min
+          tr
+            td
+            td
+              | {{ statResults.sensorHubData1.mean | fahrenheit | number:2 }}
+              span.stat-label  F
+            td
+              | {{ statResults.sensorHubData1.max | fahrenheit | number:2 }}
+              span.stat-label  F
+            td
+              | {{ statResults.sensorHubData1.min | fahrenheit | number:2 }}
+              span.stat-label  F
+            
+    .col-xs-4
+      .panel.panel-warning
+        .panel-heading
+          i.icon-lamp
+          |  Light
+          small  ({{ statResults.sensorHubData2.count | number }} readings)
+        table.table
+          tr
+            th
+            th mean
+            th max
+            th min
+          tr
+            td
+            td
+              | {{ statResults.sensorHubData2.mean | number:2 }}
+              span.stat-label  lux
+            td
+              | {{ statResults.sensorHubData2.max }}
+              span.stat-label  lux
+            td
+              | {{ statResults.sensorHubData2.min }}
+              span.stat-label  lux
+    .col-xs-4
+      .panel.panel-info
+        .panel-heading
+          i.icon-droplets
+          |  Humidity
+          small  ({{ statResults.sensorHubData3.count | number }} readings)
+        table.table
+          tr
+            th
+            th mean
+            th max
+            th min
+          tr
+            td
+            td
+              | {{ statResults.sensorHubData3.mean | number:2 }}
+              span.stat-label  %
+            td
+              | {{ statResults.sensorHubData3.max }}
+              span.stat-label  %
+            td
+              | {{ statResults.sensorHubData3.min }}
+              span.stat-label  %
+
+  .row
+    .col-xs-12(style='height:205px;overflow:auto')
+      table.table
+        tr
+          th Time
+          th MAC
+          th # of Sensors
+          th RSSI
+          th SH Batt
+          th Temp
+          th Light
+          th Humidity
+          th SH MAC
+          th SH RSSI
+          th SH Type
+        tr(ng-repeat='searchResult in searchResults')
+          td {{ searchResult.message.timestamp | date:'MMM dd, h:mm a' }}
+          td {{ searchResult.message.macAddress }}
+          td {{ searchResult.message.numberOfSensors }}
+          td {{ searchResult.message.rssi }}
+          td {{ searchResult.message.sensorHubBattery }}
+          td {{ searchResult.message.sensorHubData1 }}
+          td {{ searchResult.message.sensorHubData2 }}
+          td {{ searchResult.message.sensorHubData3 }}
+          td {{ searchResult.message.sensorHubMacAddress }}
+          td {{ searchResult.message.sensorHubRssi }}
+          td {{ searchResult.message.sensorHubType }}
+
+  .row
+    .col-xs-12(style='margin-top:10px')
+      .pull-right
+        a.btn.btn-default(ng-show='searchParams.offset > 0', ng-click="searchParams.offset = searchParams.offset-20") &larr; Previous
+        a.btn.btn-default(ng-click="searchParams.offset = searchParams.offset+20") Next &rarr;
+
+  .row(style='margin-top:25px')
+    .col-xs-12
+      a.btn.btn-primary(target='_', ng-href='{{ downloadUrl() }}') Download CSV

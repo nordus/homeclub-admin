@@ -1,0 +1,19 @@
+.container
+  .row
+    .col-xs-12.page-header
+  
+      h3.pull-left(style='margin:0 0 15px') Connectivity (last 12 hours)
+
+  .row
+    .col-xs-12
+      table.table
+        tr
+          th.col-xs-3 Account
+          th Sensor Hubs
+        tr(ng-repeat='(macAddress,statsBySensorHubMacAddress) in histograms')
+          td
+            a(href="#/customer-accounts/{{ macAddress.split('|')[2] }}/gateways/{{ macAddress.split('|')[0] }}", title="HomeBase MAC: {{ macAddress.split('|')[0] }}") {{ macAddress.split('|')[1] }}
+          td
+            .col-xs-3(ng-repeat='(sensorHubMacAddress,stats) in statsBySensorHubMacAddress')
+              h6 {{ sensorHubMacAddress }}
+              rickshaw(rickshaw-options='histogramOptions', rickshaw-features='histogramFeatures', rickshaw-series="stats")
