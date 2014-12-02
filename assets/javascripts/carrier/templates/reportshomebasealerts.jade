@@ -35,7 +35,7 @@
     .col-xs-12(style='margin-top:10px')
       .pull-right
         a.btn.btn-default(ng-show='searchParams.offset > 0', ng-click="searchParams.offset = searchParams.offset-20") &larr; Previous
-        a.btn.btn-default(ng-click="searchParams.offset = searchParams.offset+20") Next &rarr;
+        a.btn.btn-default(ng-show='searchResults.length == 20', ng-click="searchParams.offset = searchParams.offset+20") Next &rarr;
 
   .row(style='margin-top:25px')
     .col-xs-12
