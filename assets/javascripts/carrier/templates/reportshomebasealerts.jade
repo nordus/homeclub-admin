@@ -25,11 +25,11 @@
           th Gateway Event Code
           th RSSI
         tr(ng-repeat='searchResult in searchResults')
-          td {{ searchResult.message.timestamp | date:'MMM dd, h:mm a' }}
-          td {{ searchResult.message.macAddress }}
-          td {{ searchResult.message.gatewayBattery }}
-          td {{ searchResult.message.gatewayEventCode }}
-          td {{ searchResult.message.rssi }}
+          td {{ searchResult.timestamp | date:'MMM dd, h:mm a' }}
+          td {{ searchResult.macAddress }}
+          td {{ searchResult.gatewayBattery }}
+          td {{ searchResult.gatewayEventCode }}
+          td {{ searchResult.rssi }}
 
   .row
     .col-xs-12(style='margin-top:10px')

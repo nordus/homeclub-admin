@@ -102,17 +102,17 @@
           th SH RSSI
           th SH Type
         tr(ng-repeat='searchResult in searchResults')
-          td {{ searchResult.message.timestamp | date:'MMM dd, h:mm a' }}
-          td {{ searchResult.message.macAddress }}
-          td {{ searchResult.message.numberOfSensors }}
-          td {{ searchResult.message.rssi }}
-          td {{ searchResult.message.sensorHubBattery }}
-          td {{ searchResult.message.sensorHubData1 }}
-          td {{ searchResult.message.sensorHubData2 }}
-          td {{ searchResult.message.sensorHubData3 }}
-          td {{ searchResult.message.sensorHubMacAddress }}
-          td {{ searchResult.message.sensorHubRssi }}
-          td {{ searchResult.message.sensorHubType }}
+          td {{ searchResult.timestamp | date:'MMM dd, h:mm a' }}
+          td {{ searchResult.macAddress }}
+          td {{ searchResult.numberOfSensors }}
+          td {{ searchResult.rssi }}
+          td {{ searchResult.sensorHubBattery }}
+          td {{ searchResult.sensorHubData1 }}
+          td {{ searchResult.sensorHubData2 }}
+          td {{ searchResult.sensorHubData3 }}
+          td {{ searchResult.sensorHubMacAddress }}
+          td {{ searchResult.sensorHubRssi }}
+          td {{ searchResult.sensorHubType }}
 
   .row
     .col-xs-12(style='margin-top:10px')

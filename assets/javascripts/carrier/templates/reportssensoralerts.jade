@@ -28,14 +28,14 @@
           th SH MAC
           th SH RSSI
         tr(ng-repeat='searchResult in searchResults')
-          td {{ searchResult.message.timestamp | date:'MMM dd, h:mm a' }}
-          td {{ searchResult.message.macAddress }}
-          td {{ searchResult.message.sensorEventStart }}
-          td {{ searchResult.message.sensorEventEnd }}
-          td {{ searchResult.message.rssi }}
-          td {{ searchResult.message.sensorHubBattery }}
-          td {{ searchResult.message.sensorHubMacAddress }}
-          td {{ searchResult.message.sensorHubRssi }}
+          td {{ searchResult.timestamp | date:'MMM dd, h:mm a' }}
+          td {{ searchResult.macAddress }}
+          td {{ searchResult.sensorEventStart }}
+          td {{ searchResult.sensorEventEnd }}
+          td {{ searchResult.rssi }}
+          td {{ searchResult.sensorHubBattery }}
+          td {{ searchResult.sensorHubMacAddress }}
+          td {{ searchResult.sensorHubRssi }}
 
   .row
     .col-xs-12(style='margin-top:10px')

@@ -14,6 +14,7 @@ define ['ng', 'carrier/services/services', 'ngResource'], (angular, services) ->
 		  defaultParams.sensorHubMacAddresses = $rootScope.currentUser.gateways[0].sensorHubs
 
 		search = $resource '/api/search', defaultParams, {getAll:{isArray:true}}
+		stats = $resource '/api/stats'
 
 
 		all: (params, success) ->
@@ -23,13 +24,11 @@ define ['ng', 'carrier/services/services', 'ngResource'], (angular, services) ->
 		sensorHubData: (params, success) ->
 			params = angular.extend({msgType:5}, params)
 			
-			results = search.getAll params, ->
+			results = search.query params, ->
 				success results
 
 		sensorHubStats: (params, success) ->
-			params = angular.extend({msgType:5,stats:true}, params)
-			
-			results = search.get params, ->
+			results = stats.get params, ->
 				success results
 
 		gatewayEvents: (params, success) ->

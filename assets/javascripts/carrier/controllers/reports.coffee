@@ -19,7 +19,7 @@ define ['carrier/controllers/controllers', 'carrier/services/search', 'carrier/s
       search.sensorHubStats $scope.searchParams, (resp) -> $scope.statResults = resp
 
     getSearchResults = ->
-      params = angular.extend { limit:20 }, $scope.searchParams
+      params = angular.extend { limit:20, filtered:true }, $scope.searchParams
       search.sensorHubData params, (resp) -> $scope.searchResults = resp
 
     getStatResults()
