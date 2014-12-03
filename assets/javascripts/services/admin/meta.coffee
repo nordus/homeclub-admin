@@ -5,9 +5,10 @@ define ['ng', 's/services'], (angular, services) ->
 
 		{
       "sensorHubTypes": {
-        "1": "Water Protector",
-        "2": "Comfort Director",
-        "3": "Home Defender"
+        "1": "Water Detect",
+        "2": "Indoor Climate",
+        "3": "Item Movement",
+        "4": "Human Motion"
       },
       "roomTypes": {
         "53335728e286cb970c88aaa0": "bedroom",
