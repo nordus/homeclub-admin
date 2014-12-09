@@ -10,7 +10,8 @@ requirejs.config
     bootstrap   : 'vendor/bootstrap/bootstrap'
     toastr      : 'vendor/toastr/toastr'
     d3          : 'vendor/d3/d3'
-    rickshaw    : 'vendor/rickshaw/rickshaw'
+    rickshaw    : 'vendor/rickshaw/rickshaw.min'
+    'angular-rickshaw': 'angular-rickshaw.min'
 
   shim:
     ng:
