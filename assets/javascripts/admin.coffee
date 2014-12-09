@@ -9,6 +9,7 @@ require ['admin-requirejs-config'], ->
     'c/carriercreate'
     'c/carriers'
     'c/carriershow'
+    'homeclub/controllers/connectivity'
     'c/customeraccounts'
     'c/customeraccountshow'
     'c/dashboard'
@@ -119,6 +120,11 @@ require ['admin-requirejs-config'], ->
         .when '/users',
           controller: 'users'
           template: templates.users
+          resolve: auth
+
+        .when '/connectivity',
+          controller: 'connectivity'
+          template: templates.connectivity
           resolve: auth
 
         .otherwise
