@@ -8,4 +8,4 @@ define [
   's/services'
   ], (angular) ->
 
-  angular.module('app', ['controllers', 'ngResource', 'ngRoute', 'services'])
+  angular.module('app', ['controllers', 'ngResource', 'ngRoute', 'services', 'angular-rickshaw'])

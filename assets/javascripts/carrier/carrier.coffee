@@ -11,7 +11,6 @@ requirejs.config
     toastr      : 'vendor/toastr/toastr'
     d3          : 'vendor/d3/d3'
     rickshaw    : 'vendor/rickshaw/rickshaw'
-    'angular-rickshaw'    : 'vendor/angular-rickshaw/rickshaw'
 
   shim:
     ng:
