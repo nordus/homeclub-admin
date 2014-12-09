@@ -1,5 +1,7 @@
 define [
   'ng'
+  'rickshaw'
+  'angular-rickshaw'
   'c/controllers'
   'ngResource'
   'ngRoute'
