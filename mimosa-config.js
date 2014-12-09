@@ -28,8 +28,8 @@ exports.config = {
         folders:["javascripts/homeclub/templates"],
         outputFileName: "javascripts/homeclub-templates"
       }]
-  }//,
-  // require: {
-  //   commonConfig: 'admin-requirejs-config'
-  // }
+  },
+  require: {
+     commonConfig: 'admin-requirejs-config'
+  }
 }

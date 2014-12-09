@@ -54,9 +54,10 @@ exports.startServer = (config, callback) ->
   if callback
     callback(server)
   else
-    config.liveReload.additionalDirs = config.liveReload.additionalDirs.concat [
-      "#{envConfig.rootPath}public/javascripts"
-      "#{envConfig.rootPath}views"
-    ]
+    if config.liveReload && config.liveReload.additionalDirs
+      config.liveReload.additionalDirs = config.liveReload.additionalDirs.concat [
+        "#{envConfig.rootPath}public/javascripts"
+        "#{envConfig.rootPath}views"
+      ]
     return app
 
