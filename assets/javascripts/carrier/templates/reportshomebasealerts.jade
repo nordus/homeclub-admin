@@ -2,9 +2,9 @@
 
   .row
     .col-xs-12.page-header
-  
-      h3.pull-left(style='margin:0 0 15px') HomeBase Alerts
-  
+
+      h3.pull-left(style='margin:0 0 15px') Network Hub Alerts
+
       form.navbar-form.navbar-right(style='margin:0')
         .form-group
           select.form-control(ng-model='searchParams.start')
@@ -20,9 +20,9 @@
       table.table
         tr
           th Time
-          th MAC
-          th Gateway Batt
-          th Gateway Event Code
+          th NH MAC
+          th NH Batt
+          th NH Event Code
           th RSSI
         tr(ng-repeat='searchResult in searchResults')
           td {{ searchResult.timestamp | date:'MMM dd, h:mm a' }}

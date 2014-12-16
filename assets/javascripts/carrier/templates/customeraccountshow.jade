@@ -6,11 +6,11 @@
         a(href='#/customer-accounts') Customers
         |  /
         | {{ account.name.first }} {{ account.name.last }}
-  
+
       form.navbar-form.navbar-right(style='margin:0')
         .btn-group(ng-repeat='gateway in account.gateways')
           a.btn.btn-default(href='#/customer-accounts/{{ account._id }}/gateways/{{ gateway }}')
-            | View Gateway 
+            | View Network Hub 
             small (..{{ gateway.substr(-4) }})
 
   .row
