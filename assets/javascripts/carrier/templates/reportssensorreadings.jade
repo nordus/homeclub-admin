@@ -5,21 +5,13 @@
 
       h3.pull-left(style='margin:0 0 15px') Sensor Readings
 
-  .row
-    .col-xs-4
-      strong Start:
-      p.input-group
-        input(ng-model="dt", type="text", class="form-control", datepicker-popup="{{format}}", is-open="opened", min-date="minDate", max-date="'2015-06-22'", datepicker-options="dateOptions", date-disabled="disabled(date, mode)", ng-required="true", close-text="Close")
-        span.input-group-btn
-          button(type="button", class="btn btn-default", ng-click="open($event)")
-            i.icon-calendar
-    .col-xs-4
-      strong End:
-      p.input-group
-        input(ng-model="endDt", type="text", class="form-control", datepicker-popup="{{format}}", is-open="endOpened", min-date="dt", max-date="'2015-06-22'", datepicker-options="dateOptions", date-disabled="disabled(date, mode)", ng-required="true", close-text="Close")
-        span.input-group-btn
-          button(type="button", class="btn btn-default", ng-click="openEndDt($event)")
-            i.icon-calendar
+      form.navbar-form.navbar-right(style='margin:0')
+        .form-group
+          select.form-control(ng-model='searchParams.start')
+            option(value='1 day ago') 1 day ago to now
+            option(value='1 week ago') 1 week ago to now
+            option(value='30 days ago') 30 days ago to now
+            option(value='1 year ago') ALL
 
   .row
     .col-xs-4
