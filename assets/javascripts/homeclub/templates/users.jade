@@ -1,4 +1,7 @@
 .container
+
+  include _filtercontrols
+
   .row
     .col-xs-12
       table.table
@@ -10,7 +13,7 @@
             th
 
         tbody
-          tr(ng-repeat='user in users')
+          tr(ng-repeat='user in users | filter:searchText | orderBy:sortOrder')
             td
               a(href='#/users/{{ user._id }}') {{ user.email }}
             td {{ user.createdAt | date:'MMM d, yyyy' }}
