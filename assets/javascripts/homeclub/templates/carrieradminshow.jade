@@ -9,7 +9,7 @@
 
       form.navbar-form.navbar-right(style='margin:0')
         a.btn.btn-default(ng-if='admin.carrier', href="#/carriers/{{ admin.carrier }}") View Carrier
-        a.btn.btn-default(href="#/users/{{ admin.user }}") View User
+        a.btn.btn-default(ng-if='admin.user', href="#/users/{{ admin.user }}") View User
 
   .row
     .col-xs-12
