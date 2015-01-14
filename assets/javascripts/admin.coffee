@@ -18,6 +18,7 @@ require ['admin-requirejs-config'], ->
     'c/homeclubadmins'
     'c/homeclubadminshow'
     'c/nav'
+    'homeclub/controllers/networkhubs'
     'c/import'
     'c/sensorhubcreate'
     'c/users'
@@ -125,6 +126,11 @@ require ['admin-requirejs-config'], ->
         .when '/connectivity',
           controller: 'connectivity'
           template: templates.connectivity
+          resolve: auth
+
+        .when '/network-hubs',
+          controller: 'networkhubs'
+          template: templates.networkhubs
           resolve: auth
 
         .otherwise

@@ -1,0 +1,20 @@
+.container
+
+  include _filtercontrols
+
+  .row
+    .col-xs-12
+      table.table
+        thead
+          tr
+            th MAC
+            th Customer
+            th Sensor Hubs
+
+        tbody
+          tr(ng-repeat='nh in networkHubs | filter:searchText | orderBy:sortOrder')
+            td {{ nh._id }}
+            td
+              select.form-control(ng-model='nh.customerAccount', ng-options='customerId as customerName for (customerId, customerName) in customerNames')
+            td
+              input.form-control(type='text', ng-model='nh.sensorHubs')
