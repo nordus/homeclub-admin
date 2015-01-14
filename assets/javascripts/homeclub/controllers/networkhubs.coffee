@@ -1,6 +1,6 @@
-define ['c/controllers', 's/customeraccount', 's/gateway'], (controllers) ->
+define ['c/controllers', 's/customeraccount', 's/gateway', 's/notifier'], (controllers) ->
 
-  controllers.controller 'networkhubs', ['$scope', 'customeraccount', 'gateway', ($scope, customeraccount, gateway) ->
+  controllers.controller 'networkhubs', ['$scope', 'customeraccount', 'gateway', 'notifier', ($scope, customeraccount, gateway, notifier) ->
 
     $scope.networkHubs = gateway.query()
     customeraccount.query
@@ -20,5 +20,16 @@ define ['c/controllers', 's/customeraccount', 's/gateway'], (controllers) ->
     ]
 
     $scope.sortOrder = $scope.sortOptions[0].value
+
+    $scope.save = (networkHub) ->
+      unless Array.isArray(networkHub.sensorHubs)
+        networkHub.sensorHubs = networkHub.sensorHubs.split ','
+      networkHub.$update (updatedNetworkHub) ->
+        notifier.success 'Saved!'
+
+    $scope.delete = (networkHub) ->
+      if confirm "Delete #{networkHub._id}?"
+        networkHub.$delete (deletedNetworkHub) ->
+          notifier.success "Network Hub #{networkHub._id} deleted!"
 
   ]
