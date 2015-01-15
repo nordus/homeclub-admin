@@ -19,6 +19,14 @@
               select.form-control(ng-model='nh.customerAccount', ng-options='customerId as customerName for (customerId, customerName) in customerNames')
             td
               input.form-control(type='text', ng-model='nh.sensorHubs')
+              ol.breadcrumb(style='margin-bottom:0')
+                // TODO: use a virtual attribute and a 'watch' instead of sensorHubs
+                li(ng-repeat='sensorHubMac in nh.sensorHubs')
+                  span(ng-show='sensorHubTypeByMac[sensorHubMac]') {{ sensorHubTypeByMac[sensorHubMac] }}
+                  span(ng-hide='sensorHubTypeByMac[sensorHubMac]')
+                    | NOT FOUND (
+                    a(href='#/customer-accounts/{{ nh.customerAccount }}/gateways/{{ nh._id }}/sensor-hubs/create') create
+                    | ?)
             td
               a.btn.btn-link(ng-click='save(nh)') Save
               a.btn.btn-link(ng-click='delete(nh)') Delete

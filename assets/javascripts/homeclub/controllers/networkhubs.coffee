@@ -1,8 +1,17 @@
-define ['c/controllers', 's/customeraccount', 's/gateway', 's/notifier'], (controllers) ->
+define ['c/controllers', 's/customeraccount', 's/gateway', 's/notifier', 's/sensorhub', 's/meta'], (controllers) ->
 
-  controllers.controller 'networkhubs', ['$scope', 'customeraccount', 'gateway', 'notifier', ($scope, customeraccount, gateway, notifier) ->
+  controllers.controller 'networkhubs', ['$scope', 'customeraccount', 'gateway', 'notifier', 'sensorhub', 'meta', ($scope, customeraccount, gateway, notifier, sensorhub, meta) ->
+
+    $scope.meta = meta
 
     $scope.networkHubs = gateway.query()
+
+    sensorhub.query (sensorHubs) ->
+      $scope.sensorHubTypeByMac = {}
+      sensorHubs.forEach (sh) ->
+        @[sh._id] = meta.sensorHubTypes[sh.sensorHubType]
+      , $scope.sensorHubTypeByMac
+
     customeraccount.query
       select: 'name'
     , (customers) ->
