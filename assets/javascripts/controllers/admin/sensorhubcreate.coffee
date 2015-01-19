@@ -8,11 +8,17 @@ define ['c/controllers', 's/gateway', 's/sensorhub', 's/meta'], (controllers) ->
     gateway.get id:$routeParams.gatewayId, (data) -> $scope.gateway = data
 
     $scope.save = ->
-      $scope.sensorHub.$save (sensorHub) ->
-        $scope.gateway.sensorHubs.splice($scope.gateway.sensorHubs.length, 0, sensorHub._id)
+      if $scope.dupes
+        $scope.gateway.sensorHubs.splice($scope.gateway.sensorHubs.length, 0, $scope.sensorHub._id)
         $scope.gateway.$update ->
-          notifier.success "Sensor Hub #{sensorHub._id} created!"
+          notifier.success "Sensor Hub #{$scope.sensorHub._id} created!"
           $location.path "/customer-accounts/#{$scope.gateway.customerAccount}/gateways/#{$scope.gateway._id}"
+      else
+        $scope.sensorHub.$save (sensorHub) ->
+          $scope.gateway.sensorHubs.splice($scope.gateway.sensorHubs.length, 0, sensorHub._id)
+          $scope.gateway.$update ->
+            notifier.success "Sensor Hub #{sensorHub._id} created!"
+            $location.path "/customer-accounts/#{$scope.gateway.customerAccount}/gateways/#{$scope.gateway._id}"
 
     $scope.dupeCheck = (form) ->
       if form.macAddress.$valid

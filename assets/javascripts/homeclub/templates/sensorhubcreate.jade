@@ -11,13 +11,13 @@
     .col-xs-3
       form.form-horizontal(name='newSensorHubForm', ng-submit='save()')
         .form-group
-          .col-xs-12(ng-class="{'has-error':dupes||newSensorHubForm.macAddress.$error.pattern}")
+          .col-xs-12(ng-class="{'has-error':newSensorHubForm.macAddress.$error.pattern}")
             input.form-control(name='macAddress', ng-pattern='/^[a-f|A-F|0-9]{12}$/', ng-change='dupeCheck(newSensorHubForm)', ng-model='sensorHub._id', placeholder='MAC Address (used as ID)', required)
-            label.control-label(ng-show='dupes') duplicate MAC Address
+            label.control-label(ng-show='dupes') Duplicate MAC Address.  Saving will link existing Sensor Hub (instead of creating a new one).
             label.control-label(ng-show='newSensorHubForm.macAddress.$error.pattern') invalid MAC address
 
     .col-xs-3
-      .form-group
+      .form-group(ng-hide='dupes')
         label.col-xs-3.control-label Type
         .col-xs-9
           select.form-control(ng-model='sensorHub.sensorHubType', ng-options='sensorHubTypeId as sensorHubTypeName for (sensorHubTypeId, sensorHubTypeName) in meta.sensorHubTypes')
@@ -26,4 +26,4 @@
     .col-xs-12
       .form-group
         .col-xs-2.col-xs-offset-4.ac
-          button.btn.btn-warning.btn-block(ng-click='save()', ng-disabled='dupes || newSensorHubForm.$invalid') Save
+          button.btn.btn-warning.btn-block(ng-click='save()', ng-disabled='newSensorHubForm.$invalid') Save
