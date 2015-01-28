@@ -5,6 +5,7 @@ require ['admin-requirejs-config'], ->
     'admin-app'
     'homeclub-templates'
     'c/carrieradmins'
+    'homeclub/controllers/carrieradmincreate'
     'c/carrieradminshow'
     'c/carriercreate'
     'c/carriers'
@@ -111,6 +112,11 @@ require ['admin-requirejs-config'], ->
         .when '/import',
           controller: 'import'
           template: templates.import
+          resolve: auth
+
+        .when '/users/:id/carrier-admin/create',
+          controller: 'carrieradmincreate'
+          template: templates.carrieradmincreate
           resolve: auth
 
         .when '/users/:id',
