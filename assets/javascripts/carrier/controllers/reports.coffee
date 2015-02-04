@@ -10,7 +10,7 @@ define ['carrier/controllers/controllers', 'carrier/services/search', 'carrier/s
 	    start       : '30 days ago'
 
     $scope.downloadUrl = ->
-      params = angular.extend { download:'true', limit:50000 }, $scope.searchParams
+      params = angular.extend { download:'true', limit:5000000 }, $scope.searchParams
       baseUrl = "http://#{$location.host()}/api/search"
       buildurl(baseUrl, params)
 
