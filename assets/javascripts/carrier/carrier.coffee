@@ -95,6 +95,11 @@ require [
         template: templates.connectivity
         resolve: auth
 
+      .when '/reports',
+        controller  : 'reports'
+        template    : templates.reports
+        resolve     : auth
+
       .when '/reports/:msgType',
         controller  : 'reports'
         template    : (routeParams) ->

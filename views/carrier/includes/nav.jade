@@ -11,14 +11,7 @@ nav.navbar.navbar-default(ng-controller='nav')
         li(ng-class="{active: isActive('/dashboard')}"): a(href='#/dashboard') Dashboard
         li(ng-class="{active: isActive('/carrier-admins')}"): a(href='#/carrier-admins') Admins
         li(ng-class="{active: isActive('/customer-accounts')}"): a(href='#/customer-accounts') Customers
-        li.dropdown
-          a.dropdown-toggle(data-toggle='dropdown')
-            | Reports
-            b.caret
-          ul.dropdown-menu
-            li: a(href='#/reports/5') Sensor Readings
-            li: a(href='#/reports/4') Sensor Alerts
-            li: a(href='#/reports/2') Network Hub Alerts
+        li(ng-class="{active: isActive('/reports')}"): a(href='#/reports') Reports
         li(ng-class="{active: isActive('/connectivity')}"): a(href='#/connectivity') Connectivity
 
       ul.nav.navbar-nav.navbar-right

@@ -34,4 +34,13 @@ define ['carrier/controllers/controllers', 'carrier/services/search', 'carrier/s
         $scope.searchParams.offset = 0
         getStatResults()
         getSearchResults()
+
+    $scope.reportParams =
+      end: new Date()
+      start: undefined
+
+    $scope.downloadUrlByMsgType = (msgType) ->
+      params = angular.extend { msgType:msgType, start:$scope.reportParams.start, download:'true', limit:5000000 }, $scope.reportParams
+      baseUrl = "http://#{$location.host()}/api/search"
+      buildurl(baseUrl, params)
   ]
