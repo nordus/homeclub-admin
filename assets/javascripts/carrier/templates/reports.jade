@@ -24,7 +24,7 @@
           small(ng-show='reportParams.startDt && reportParams.endDt') {{ reportParams.startDt | date:'MMM d yyyy' }} - {{ reportParams.endDt | date:'MMM d yyyy' }}
       .alert.alert-info(ng-hide='reportParams.startDt && reportParams.endDt') Please select start and end dates
       .list-group(ng-show='reportParams.startDt && reportParams.endDt')
-        a(ng-href="{{ downloadUrlByMsgType('0') }}").list-group-item Download Network Hub Events report
+        a(ng-href="{{ downloadUrlByMsgType('0') }}").list-group-item Download Network Hub Heartbeat report
         a(ng-href="{{ downloadUrlByMsgType('2') }}").list-group-item Download Network Hub Events report
         a(ng-href="{{ downloadUrlByMsgType('4') }}").list-group-item Download Sensor Hub Events report
         a(ng-href="{{ downloadUrlByMsgType('5') }}").list-group-item Download Sensor Hub Readings report
