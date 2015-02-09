@@ -8,26 +8,27 @@
   .row
     .col-xs-6
       form(name='reportsForm')
-        .form-group.col-xs-6(ng-class="{'has-error': !reportParams.start}")
+        .form-group.col-xs-6(ng-class="{'has-error': !reportParams.startDt}")
           label(for='start').control-label Start
-          input(type='date', max="{{ reportParams.end | date:'yyyy-MM-dd' }}", ng-model='reportParams.start', id='start', required).form-control
-          p(ng-hide='reportParams.start').help-block Please enter start date
-        .form-group.col-xs-6(ng-class="{'has-error': !reportParams.end}")
+          input(type='date', max="{{ reportParams.endDt | date:'yyyy-MM-dd' }}", ng-model='reportParams.startDt', id='start', required).form-control
+          p(ng-hide='reportParams.startDt').help-block Please enter start date
+        .form-group.col-xs-6(ng-class="{'has-error': !reportParams.endDt}")
           label(for='end').control-label End
-          input(type='date', ng-model='reportParams.end', id='end', required).form-control
-          p(ng-hide='reportParams.end').help-block Please enter end date
+          input(type='date', ng-model='reportParams.endDt', id='end', required).form-control
+          p(ng-hide='reportParams.endDt').help-block Please enter end date
   .row
     .col-xs-6
       .page-header(style='margin-top:0; padding-top:0')
         h3(style='margin:15px 0 10px')
           | Download links&nbsp;
-          small(ng-show='reportParams.start && reportParams.end') {{ reportParams.start | date:'MMM d yyyy' }} - {{ reportParams.end | date:'MMM d yyyy' }}
-      .alert.alert-info(ng-hide='reportParams.start && reportParams.end') Please select start and end dates
-      .list-group(ng-show='reportParams.start && reportParams.end')
-        a(ng-href="{{ downloadUrlByMsgType('2') }}").list-group-item Download Network Hub Alerts report
-        a(ng-href="{{ downloadUrlByMsgType('4') }}").list-group-item Download Sensor Hub Alerts report
+          small(ng-show='reportParams.startDt && reportParams.endDt') {{ reportParams.startDt | date:'MMM d yyyy' }} - {{ reportParams.endDt | date:'MMM d yyyy' }}
+      .alert.alert-info(ng-hide='reportParams.startDt && reportParams.endDt') Please select start and end dates
+      .list-group(ng-show='reportParams.startDt && reportParams.endDt')
+        a(ng-href="{{ downloadUrlByMsgType('0') }}").list-group-item Download Network Hub Events report
+        a(ng-href="{{ downloadUrlByMsgType('2') }}").list-group-item Download Network Hub Events report
+        a(ng-href="{{ downloadUrlByMsgType('4') }}").list-group-item Download Sensor Hub Events report
         a(ng-href="{{ downloadUrlByMsgType('5') }}").list-group-item Download Sensor Hub Readings report
-      .alert.alert-warning(ng-show='reportParams.start && reportParams.end')
+      .alert.alert-warning(ng-show='reportParams.startDt && reportParams.endDt')
         | Click&nbsp;
-        a(href='http://example.com/data_dictionary', target='_') here
+        a(href='https://docs.google.com/document/d/1qPN6elWmhzQT0NCroWrYrdReg8OdHmwVfByHDRVSgFE/pub', target='_') here
         | &nbsp;for data dictionary
