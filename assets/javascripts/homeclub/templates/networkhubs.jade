@@ -8,6 +8,7 @@
         thead
           tr
             th MAC
+            th Phone
             th Customer
             th Sensor Hubs
             th
@@ -15,6 +16,8 @@
         tbody
           tr(ng-repeat='nh in networkHubs | filter:searchText | orderBy:sortOrder')
             td {{ nh._id }}
+            td
+              input.form-control(ng-model='nh.phone')
             td
               select.form-control(ng-model='nh.customerAccount', ng-options='customerId as customerName for (customerId, customerName) in customerNames')
             td
