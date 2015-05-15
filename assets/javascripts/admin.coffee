@@ -11,6 +11,10 @@ require ['admin-requirejs-config'], ->
     'c/carriers'
     'c/carriershow'
     'homeclub/controllers/connectivity'
+    'homeclub/controllers/hc1create'
+    'homeclub/controllers/hc2create'
+    'homeclub/controllers/outboundcommands'
+    'homeclub/controllers/outboundsms'
     'c/customeraccounts'
     'c/customeraccountshow'
     'c/dashboard'
@@ -137,6 +141,26 @@ require ['admin-requirejs-config'], ->
         .when '/network-hubs',
           controller: 'networkhubs'
           template: templates.networkhubs
+          resolve: auth
+
+        .when '/outbound-commands/hc1/create',
+          controller: 'hc1create'
+          template: templates.hc1create
+          resolve: auth
+
+        .when '/outbound-commands/hc2/create',
+          controller: 'hc2create'
+          template: templates.hc2create
+          resolve: auth
+
+        .when '/outbound-sms',
+          controller: 'outboundsms'
+          template: templates.outboundsms
+          resolve: auth
+
+        .when '/outbound-commands',
+          controller: 'outboundcommands'
+          template: templates.outboundcommands
           resolve: auth
 
         .otherwise

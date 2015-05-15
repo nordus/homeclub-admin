@@ -1,3 +1,10 @@
+style.
+  p.help-block {
+    text-overflow:ellipsis;
+    overflow-x: hidden;
+    white-space: nowrap;
+  }
+
 .container
 
   .row
@@ -10,8 +17,22 @@
       form(name='importForm')
         .form-group
           select.form-control(ng-model='selectedCarrier', ng-options='c._id as c.name for c in carriers')
-        .form-group
-          input.form-control(type='url', ng-model='url', placeholder='Google Doc Url', required)
+        .form-group(ng-class="{ 'has-error':importForm.spreadsheetKey.$error.minlength || importForm.spreadsheetKey.$error.maxlength }")
+          //input.form-control(type='url', ng-model='url', placeholder='Google Doc Url', required)
+          input.form-control(name='spreadsheetKey', ng-model='spreadsheetKey', ng-minlength='44', ng-maxlength='44', placeholder='Spreadsheet Key (i.e. 1Q5Dk_jFqGpHtV54hlHQgamkpbckiC4ObQkXybTvowhg)', required)
+          p.help-block(ng-if='importForm.spreadsheetKey.$error.minlength')
+            | .. too short (should be 44 characters)
+          p.help-block(ng-if='importForm.spreadsheetKey.$error.maxlength')
+            | .. too long (should be 44 characters)
+          p.help-block
+            small
+              | https://docs.google.com/spreadsheet/ccc?key=
+              strong 1Q5Dk_jFqGpHtV54hlHQgamkpbckiC4ObQkXybTvowhg
+              | &hl
+              br
+              | https://docs.google.com/spreadsheets/d/
+              strong 1Q5Dk_jFqGpHtV54hlHQgamkpbckiC4ObQkXybTvowhg
+              | /edit#gid=0
         button.btn(ng-disabled='importForm.$invalid', ng-class="{ 'btn-default disabled':loading, 'btn-warning':!loading }", ng-click='preview()')
           span(ng-hide='loading') Preview
           span(ng-show='loading') .. loading

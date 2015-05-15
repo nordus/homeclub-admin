@@ -24,7 +24,21 @@ nav.navbar.navbar-default(ng-controller='nav')
       ul.nav.navbar-nav.navbar-right
         li.dropdown
           a.dropdown-toggle(data-toggle='dropdown')
-            | Add new
+            | Send
+            b.caret
+          ul.dropdown-menu
+            li: a(href='#/outbound-commands/hc1/create') HC1
+            li: a(href='#/outbound-commands/hc2/create') HC2
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown')
+            | Logs
+            b.caret
+          ul.dropdown-menu
+            li: a(href='#/outbound-commands') Outbound Commands
+            li: a(href='#/outbound-sms') Outbound SMS
+        li.dropdown
+          a.dropdown-toggle(data-toggle='dropdown')
+            | Add
             b.caret
           ul.dropdown-menu
             li: a(href='#/carriers/create') Carrier

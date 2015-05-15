@@ -13,7 +13,7 @@ define ['c/controllers', 's/carrier'], (controllers) ->
       $scope.duplicateAccounts = undefined
 
       $http.post '/api/import-google-doc/preview',
-        url: $scope.url
+        spreadsheetKey: $scope.spreadsheetKey
       .success (response) =>
 
         $scope.loading = false

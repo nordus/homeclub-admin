@@ -13,6 +13,7 @@
             th City
             th State
             th
+            th
 
         tbody
           tr(ng-repeat='account in accounts | filter:selectedCarrier | filter:searchText | orderBy:sortOrder')
@@ -20,4 +21,7 @@
             td {{ account.name.last }}
             td {{ account.city }}
             td {{ account.state }}
-            td: a: i.icon-trashcan
+            td
+              a.btn.btn-default.btn-xs(href='#/outbound-commands?customerAccount={{ account._id }}') Outbound Commands
+            td
+              a: i.icon-trashcan
