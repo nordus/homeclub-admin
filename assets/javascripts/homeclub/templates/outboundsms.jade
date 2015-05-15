@@ -1,0 +1,23 @@
+.container
+
+  .row
+    .col-xs-12
+      table.table
+        thead
+          tr
+            th Created
+            th Reading Timestamp
+            th To
+            th Type
+            th
+
+        tbody
+          tr(ng-repeat='sms in outboundSms')
+            td {{ sms.created | date:'short' }}
+            td {{ sms.reading.updateTime | date:'short' }}
+            td {{ formattedNames[sms._id] }}
+            td {{ sms.reading.msgType }}
+            td
+              a.btn.btn-xs.btn-default(data-toggle='collapse', ng-href='#{{ sms._id }}') reading
+              .collapse(id='{{ sms._id }}')
+                pre {{ sms.reading | json }}

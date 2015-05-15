@@ -1,0 +1,33 @@
+.container
+  .row
+    .col-xs-12.page-header
+      h3.pull-left(style='margin:0 0 15px') Send HC1
+      form.navbar-form.navbar-right(style='margin:0')
+        .form-group
+          a.btn.btn-primary(ng-click='send()') Send &rarr;
+  .row
+    .col-xs-6
+      form(name='hc1Form')
+        legend Message
+
+        label.control-label.col-xs-4 action
+        .col-xs-8
+          select.form-control(ng-model='formInputs.action', ng-options='k for (k, v) in actions')
+
+        label.control-label.col-xs-4 payload
+        .col-xs-8
+          input.form-control(ng-hide='nbrOfBytesIsZero()', name='payload', ng-model='formInputs.payload')
+          input.form-control(ng-show='nbrOfBytesIsZero()', disabled='disabled')
+
+        label.control-label.col-xs-4 # of bytes
+        .col-xs-8
+          input.form-control(ng-model='formInputs.nbrOfBytes', disabled)
+    .col-xs-6
+      legend Recipients
+      .checkbox(ng-repeat='nh in networkHubs | filter:hasPhone')
+        label
+        input(type='checkbox', ng-click='toggleRecipients( nh._id )')
+        | {{ nh._id }}
+
+  .row
+    pre {{ data | json }}

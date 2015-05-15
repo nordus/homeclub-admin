@@ -1,0 +1,20 @@
+.container
+  .row
+    .col-xs-12.page-header
+      h3.pull-left(style='margin:0 0 15px') Send HC2
+      form.navbar-form.navbar-right(style='margin:0')
+        .form-group
+          a.btn.btn-primary Send &rarr;
+  .row
+    .col-xs-6
+      legend Message
+      div(ng-repeat='field in hc2Fields')
+        label.control-label.col-xs-4 {{ field }}
+        .col-xs-8
+          input.form-control
+    .col-xs-6
+      legend Recipients
+      .checkbox(ng-repeat='nh in networkHubs')
+        label
+        input(type='checkbox')
+        | {{ nh._id }}
