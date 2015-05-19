@@ -8,7 +8,7 @@
         thead
           tr
             th Sent
-            th Delivered
+            th Resolved
             th To
             th Type
             th
@@ -16,7 +16,7 @@
         tbody
           tr(ng-repeat='ob in outboundCommands| filter:selectedCarrier | filter:searchText | orderBy:sortOrder')
             td {{ ob.sentAt | date:'MMM dd, h:mm a' }}
-            td.text-success {{ ob.deliveredAt | date:'h:mm a' }}
+            td.text-success {{ ob.resolvedAt | date:'h:mm a' }}
             td {{ formattedNames[ob.customerAccount] }}
             td {{ msgTypesFormatted(ob.msgType, ob.params.action) }}
             td
