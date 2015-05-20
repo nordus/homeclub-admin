@@ -14,7 +14,10 @@
           input.form-control
     .col-xs-6
       legend Recipients
-      .checkbox(ng-repeat='nh in networkHubs')
+      .checkbox(ng-repeat="nh in networkHubs | filter:'!hasPendingOutboundCommand'")
         label
         input(type='checkbox')
         | {{ nh._id }}
+      legend.text-info Pending
+      .list-group
+        a.list-group-item(ng-repeat="nh in networkHubs | filter:'hasPendingOutboundCommand'") {{ nh._id }}
