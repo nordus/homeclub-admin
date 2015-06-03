@@ -7,8 +7,8 @@ define ['ng', 's/services'], (angular, services) ->
       "sensorHubTypes": {
         "1": "Water Detect",
         "2": "Indoor Climate",
-        "4": "Item Movement",
-        "3": "Human Motion"
+        "3": "Item Movement",
+        "4": "Human Motion"
       },
       "roomTypes": {
         '53a89614993d0c750d0fe2da': 'bedroom',
@@ -39,6 +39,23 @@ define ['ng', 's/services'], (angular, services) ->
         '548f9bc2e4b01c12d0145526': 'washing machine',
         '548f9bd8e4b01c12d0145529': 'water heater',
         '548f9be8e4b01c12d014552a': 'water pipe'
+      },
+      "reportingFrequencies": {
+        "1": "1 sec",
+        "2": "10 sec",
+        "3": "30 sec",
+        "4": "1 min",
+        "5": "5 min",
+        "6": "30 min",
+        "7": "1 hour",
+        "8": "6 hours",
+        "9": "12 hours",
+        "A": "24 hours"
+      },
+      "movementSensitivityLevels": {
+        "1": "Low",
+        "2": "Medium",
+        "3": "High"
       }
     }
 
