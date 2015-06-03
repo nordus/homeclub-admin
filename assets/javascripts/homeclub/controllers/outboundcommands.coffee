@@ -7,7 +7,7 @@ define ['c/controllers', 's/carrier', 's/customeraccount', 's/outboundcommand'],
     carrier.getAll {}, (data) -> $scope.carriers = data
 
     $scope.selectedCarrier = $routeParams.carrier
-    $scope.searchText = $routeParams.customerAccount
+    $scope.searchText = $routeParams.customerAccount || $routeParams.outboundCommand
 
     $scope.breadcrumb =
       title: 'Outbound Commands'

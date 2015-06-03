@@ -24,7 +24,7 @@
           input.form-control(ng-model='formInputs.nbrOfBytes', disabled)
     .col-xs-6
       legend Recipients
-      .checkbox(ng-repeat='nh in networkHubs | filter:hasPhone')
+      .checkbox(ng-repeat='nh in networkHubs | filter:noPendingOutboundCommand')
         label
         input(type='checkbox', ng-click='toggleRecipients( nh._id )')
         | {{ nh._id }}

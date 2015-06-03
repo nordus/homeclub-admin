@@ -43,6 +43,9 @@ define ['c/controllers', 's/gateway'], (controllers) ->
     $scope.nbrOfBytesIsZero = ->
       $scope.formInputs.nbrOfBytes is '00'
 
+    $scope.noPendingOutboundCommand = ( item ) ->
+      item.pendingOutboundCommand == undefined
+
     $scope.send = ->
       $http.post('/api/hc1', {formInputs:$scope.formInputs, recipients:$scope.recipients}).success (data) ->
         $scope.data = data

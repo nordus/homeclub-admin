@@ -1,23 +1,46 @@
+style.
+  input.ng-invalid.ng-touched { border-color:#a94442; }
+
+
 .container
   .row
     .col-xs-12.page-header
       h3.pull-left(style='margin:0 0 15px') Send HC2
       form.navbar-form.navbar-right(style='margin:0')
         .form-group
-          a.btn.btn-primary Send &rarr;
+          a.btn.btn-primary(ng-hide='sending', ng-click='send()', ng-disabled='hc2Form.$invalid || !recipients.length || sending') Send &rarr;
   .row
     .col-xs-6
-      legend Message
-      div(ng-repeat='field in hc2Fields')
-        label.control-label.col-xs-4 {{ field }}
-        .col-xs-8
-          input.form-control
+      form(name='hc2Form')
+        legend Message
+        div
+          label.control-label.col-xs-4 action
+          .col-xs-8
+            select.form-control(name='action', ng-model='formInputs.action', ng-options='actionId as actionName for (actionId, actionName) in actions')
+
+        div(ng-repeat='sensorType in sensorTypes', ng-show='hasSensorType( sensorType )')
+          div(ng-if="sensorType == 'movement'")
+            label.control-label.col-xs-4 sensitivity
+            .col-xs-8
+              select.form-control(name='movementSensitivity', ng-model='formInputs.movementSensitivity', ng-options='sensitivityId as sensitivity for (sensitivityId, sensitivity) in meta.movementSensitivityLevels')
+
+          div(ng-repeat="minOrMax in ['Min', 'Max']", ng-if='sensorTypeHasMinMax( sensorType )')
+            label.control-label.col-xs-4 {{ sensorType + minOrMax }}
+            .col-xs-8
+              input.form-control(name='{{ sensorType + minOrMax }}', ng-model='formInputs[sensorType + minOrMax]', type='number', min='{{ customThresholdInputRanges[sensorType+minOrMax].min }}', max='{{ customThresholdInputRanges[sensorType+minOrMax].max }}')
+
     .col-xs-6
       legend Recipients
-      .checkbox(ng-repeat="nh in networkHubs | filter:'!hasPendingOutboundCommand'")
-        label
-        input(type='checkbox')
-        | {{ nh._id }}
+      .panel.panel-default(ng-repeat="nh in networkHubs | filter:noPendingOutboundCommand")
+        .panel-heading {{ formattedNames[nh.customerAccount] }}
+        .panel-body
+          .checkbox(ng-repeat='sensorHubMac in nh.sensorHubs', ng-show='sensorHubTypeMatchesSelectedAction( sensorHubMac )')
+            label
+            input(type='checkbox', ng-click='toggleRecipients( nh._id, sensorHubMac )', ng-checked='isChecked( nh._id, sensorHubMac )')
+            | {{ sensorHubMac }}
       legend.text-info Pending
       .list-group
-        a.list-group-item(ng-repeat="nh in networkHubs | filter:'hasPendingOutboundCommand'") {{ nh._id }}
+        //a.list-group-item(ng-repeat="nh in networkHubs | filter:hasPendingOutboundCommand", href="#/outbound-commands?outboundCommand={{ nh.pendingOutboundCommand }}") {{ formattedNames[nh.customerAccount] }}
+        .input-group(ng-repeat="nh in networkHubs | filter:hasPendingOutboundCommand")
+          a.list-group-item(href="#/outbound-commands?outboundCommand={{ nh.pendingOutboundCommand }}") {{ formattedNames[nh.customerAccount] }}
+          .input-group-addon: a(ng-click='deletePendingOutboundCommand( nh )'): i.icon-trashcan
