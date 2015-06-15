@@ -12,6 +12,7 @@
             th Last
             th City
             th State
+            th Status
             th
             th
 
@@ -22,6 +23,8 @@
             td {{ account.city }}
             td {{ account.state }}
             td
+              select.form-control(ng-model='account.status', ng-options='status for status in accountStatuses')
+            td
               a.btn.btn-default.btn-xs(href='#/outbound-commands?customerAccount={{ account._id }}') Outbound Commands
             td
-              a: i.icon-trashcan
+              a.btn.btn-link(ng-click='save(account)') Save

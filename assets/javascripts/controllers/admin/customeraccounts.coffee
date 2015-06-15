@@ -1,7 +1,7 @@
-define ['c/controllers', 's/carrier', 's/customeraccount'], (controllers) ->
+define ['c/controllers', 's/carrier', 's/customeraccount', 's/notifier'], (controllers) ->
 	'use strict'
 
-	controllers.controller 'customeraccounts', ['$routeParams', '$scope', 'carrier', 'customeraccount', ($routeParams, $scope, carrier, customerAccount) ->
+	controllers.controller 'customeraccounts', ['$routeParams', '$scope', 'carrier', 'customeraccount', 'notifier', ($routeParams, $scope, carrier, customerAccount, notifier) ->
     customerAccount.getAll {}, (data) -> $scope.accounts = data
 
     carrier.getAll {}, (data) -> $scope.carriers = data
@@ -22,5 +22,11 @@ define ['c/controllers', 's/carrier', 's/customeraccount'], (controllers) ->
     ]
 
     $scope.sortOrder = $scope.sortOptions[0].value
+
+    $scope.accountStatuses = ['New', 'Active', 'Suspended', 'Cancelled']
+
+    $scope.save = ( account ) ->
+      account.$update()
+      notifier.success 'Saved!'
 
   ]
