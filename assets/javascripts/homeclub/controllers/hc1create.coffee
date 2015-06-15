@@ -1,6 +1,21 @@
-define ['c/controllers', 's/gateway'], (controllers) ->
+define ['c/controllers', 's/customeraccount', 's/gateway', 's/notifier'], (controllers) ->
 
-  controllers.controller 'hc1create', ['$http', '$scope', 'gateway', ($http, $scope, gateway) ->
+  controllers.controller 'hc1create', ['$http', '$scope', 'customeraccount', 'gateway', 'notifier', ($http, $scope, customeraccount, gateway, notifier) ->
+
+    $scope.deletePendingOutboundCommand = ( nh ) ->
+      if confirm 'Cancel pending command?'
+        nh.pendingOutboundCommand = null
+        nh.$update()
+
+    # formattedNames contains name + last 4 of MAC by accountId
+    customeraccount.query (accounts) ->
+      $scope.formattedNames = {}
+      accounts.forEach (account) ->
+        $scope.formattedNames[account._id] = [
+          account.name.first
+          account.name.last
+          ('(..' + account._id.substr(-4) + ')')
+        ].join ' '
 
     $scope.networkHubs = gateway.query()
 
@@ -43,10 +58,25 @@ define ['c/controllers', 's/gateway'], (controllers) ->
     $scope.nbrOfBytesIsZero = ->
       $scope.formInputs.nbrOfBytes is '00'
 
-    $scope.noPendingOutboundCommand = ( item ) ->
+    $scope.hasPendingOutboundCommand = (item) ->
+      item.pendingOutboundCommand != undefined
+
+    $scope.noPendingOutboundCommand = (item) ->
       item.pendingOutboundCommand == undefined
 
     $scope.send = ->
-      $http.post('/api/hc1', {formInputs:$scope.formInputs, recipients:$scope.recipients}).success (data) ->
-        $scope.data = data
+      $http.post('/api/hc1', {formInputs:$scope.formInputs, recipients:$scope.recipients}).success ( resp ) ->
+
+        if Array.isArray( resp )
+          # we updated more than one networkHub
+
+        else
+
+          updatedNetworkHub = $scope.networkHubs.filter ( nh ) ->
+            nh._id == resp.gateway
+          .pop()
+
+          updatedNetworkHub.pendingOutboundCommand = resp._id
+
+          notifier.success 'Sent!'
   ]

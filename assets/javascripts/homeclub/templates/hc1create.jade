@@ -29,5 +29,8 @@
         input(type='checkbox', ng-click='toggleRecipients( nh._id )')
         | {{ nh._id }}
 
-  .row
-    pre {{ data | json }}
+      legend.text-info Pending
+      .list-group
+        .input-group(ng-repeat="nh in networkHubs | filter:hasPendingOutboundCommand")
+          a.list-group-item(href="#/outbound-commands?outboundCommand={{ nh.pendingOutboundCommand }}") {{ formattedNames[nh.customerAccount] }}
+          .input-group-addon: a(ng-click='deletePendingOutboundCommand( nh )'): i.icon-trashcan
