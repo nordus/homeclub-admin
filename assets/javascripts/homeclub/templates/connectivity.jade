@@ -18,5 +18,5 @@
             h6 {{ sensorHubMacAddress }}
             rickshaw(rickshaw-options='histogramOptions', rickshaw-features='histogramFeatures', rickshaw-series="stats")
           td(ng-repeat='(sensorHubMacAddress,stats) in hubTypes.sensorHubs')
-            h6 {{ sensorHubMacAddress }}
+            h6 {{ sensorHubType(sensorHubMacAddress) }} (..{{ sensorHubMacAddress.substr(-4) }})
             rickshaw(rickshaw-options='histogramOptions', rickshaw-features='histogramFeatures', rickshaw-series="stats")

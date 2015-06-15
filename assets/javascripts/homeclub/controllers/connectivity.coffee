@@ -1,6 +1,6 @@
-define ['c/controllers', 'homeclub/services/histogram'], (controllers) ->
+define ['c/controllers', 'homeclub/services/histogram', 's/meta', 's/sensorhub'], (controllers) ->
 
-  controllers.controller 'connectivity', ['$filter', '$rootScope', '$scope', 'histogram', ($filter, $rootScope, $scope, histogram) ->
+  controllers.controller 'connectivity', ['$filter', '$rootScope', '$scope', 'histogram', 'meta', 'sensorhub', ($filter, $rootScope, $scope, histogram, meta, sensorhub) ->
 
     $scope.histogramOptions =
       renderer  : 'bar'
@@ -16,4 +16,12 @@ define ['c/controllers', 'homeclub/services/histogram'], (controllers) ->
 
     histogram.get {}, (data) -> $scope.histograms = data
 
+    $scope.sensorHubs = sensorhub.query()
+
+    $scope.sensorHubType = ( sensorHubMac ) ->
+      sensorHub = $scope.sensorHubs.filter ( sh ) ->
+        sh._id == sensorHubMac
+      .pop()
+
+      meta.sensorHubTypes[sensorHub.sensorHubType]
   ]
