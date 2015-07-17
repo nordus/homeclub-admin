@@ -1,6 +1,25 @@
-.container
+.navbar
+  .container.subnav
+    .navbar-header
+      .navbar-brand {{ breadcrumb.title }}
 
-  include _filtercontrolswithcarrierselect
+    form.navbar-form.navbar-right(style='margin:0')
+      .form-group
+        input.form-control(ng-model='searchText', placeholder='Search')
+        select.form-control(ng-model='selectedCarrier', ng-options='c._id as c.name for c in carriers')
+          option(value='') All Carriers
+      .form-group(style='margin-left:7px')
+        select.form-control(ng-model='sortOrder', ng-options='option.value as option.title for option in sortOptions')
+
+    .navbar-right.batch-controls(ng-show='checked.length > 0')
+      button.btn.btn-default(ng-click='backupChecked()', popover='Backup selected to Google Drive', popover-trigger='mouseenter', popover-placement='bottom')
+        span.glyphicon.glyphicon-cloud-upload
+      button.btn.btn-default(ng-click='deleteCheckedFromGraylog()', popover='Delete test data from Graylog', popover-trigger='mouseenter', popover-placement='bottom')
+        span.glyphicon.glyphicon-remove
+      button.btn.btn-default(ng-click='verifyBackupsOfChecked()', popover='Check for Google Drive backup', popover-trigger='mouseenter', popover-placement='bottom')
+        span.glyphicon.glyphicon-check
+
+.container
 
   .row
     .col-sm-12
@@ -8,6 +27,8 @@
       table.table
         thead
           tr
+            th
+              span.glyphicon.glyphicon-unchecked(ng-click='toggleAll()')
             th First
             th Last
             th City
@@ -18,6 +39,10 @@
 
         tbody
           tr(ng-repeat='account in accounts | filter:selectedCarrier | filter:searchText | orderBy:sortOrder')
+            td
+              .checkbox(ng-if='account.gateways[0]', style='margin:0')
+                label
+                  input(type='checkbox', ng-click='toggleChecked(account.gateways[0])', ng-checked='checked.indexOf(account.gateways[0]) != -1')
             td: a(href='#/customer-accounts/{{ account._id }}') {{ account.name.first }}
             td {{ account.name.last }}
             td {{ account.city }}
@@ -25,6 +50,24 @@
             td
               select.form-control(ng-model='account.status', ng-options='status for status in accountStatuses')
             td
-              a.btn.btn-default.btn-xs(href='#/outbound-commands?customerAccount={{ account._id }}') Outbound Commands
+              .btn-group
+                a.btn.btn-default.btn-xs(href='#/outbound-commands?customerAccount={{ account._id }}') Outbound
+                .btn-group(ng-if='account.gateways[0]')
+                  button.btn.btn-default.btn-xs.dropdown-toggle(type='button', data-toggle='dropdown')
+                    | Test data
+                    span.caret
+                  ul.dropdown-menu
+                    li
+                      a(ng-click='backup( account.gateways[0] )')
+                        span.glyphicon.glyphicon-cloud-upload
+                        |  Backup to Google Drive
+                    li
+                      a(ng-click='confirmDeleteFromGraylog( account.gateways[0] )')
+                        span.glyphicon.glyphicon-remove
+                        |  Delete from Graylog
+                    li
+                      a(ng-click='verifyBackup( account.gateways[0] )')
+                        span.glyphicon.glyphicon-check
+                        |  Check for Google Drive backup
             td
               a.btn.btn-link(ng-click='save(account)') Save
