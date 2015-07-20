@@ -34,6 +34,7 @@
             th City
             th State
             th Status
+            th Ship Date
             th
             th
 
@@ -49,12 +50,19 @@
             td {{ account.state }}
             td
               select.form-control(ng-model='account.status', ng-options='status for status in accountStatuses')
+            td.col-xs-2
+              p.input-group
+                input.form-control(type='text', datepicker-popup='', show-button-bar='false', ng-model='account.shipDate', is-open='openDatePickers[account._id]')
+                span.input-group-btn
+                  button.btn.btn-default(ng-click='open( $event, account._id )')
+                    i.glyphicon.glyphicon-calendar
             td
               .btn-group
                 a.btn.btn-default.btn-xs(href='#/outbound-commands?customerAccount={{ account._id }}') Outbound
                 .btn-group(ng-if='account.gateways[0]')
                   button.btn.btn-default.btn-xs.dropdown-toggle(type='button', data-toggle='dropdown')
                     | Test data
+                    | &nbsp;
                     span.caret
                   ul.dropdown-menu
                     li

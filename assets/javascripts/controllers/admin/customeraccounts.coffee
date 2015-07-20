@@ -2,6 +2,15 @@ define ['c/controllers', 's/carrier', 's/customeraccount', 's/notifier'], (contr
 	'use strict'
 
 	controllers.controller 'customeraccounts', ['$http', '$routeParams', '$scope', 'carrier', 'customeraccount', 'notifier', ($http, $routeParams, $scope, carrier, customerAccount, notifier) ->
+
+    $scope.openDatePickers = {}
+
+    $scope.open = ( $event, accountId ) ->
+      $event.preventDefault()
+      $event.stopPropagation()
+      $scope.openDatePickers[accountId] = true
+
+
     customerAccount.getAll {}, (data) ->
 
       $scope.accounts = data
