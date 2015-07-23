@@ -1,3 +1,7 @@
+style.
+  .table > tbody > tr > td.am { vertical-align: middle }
+
+
 .navbar
   .container.subnav
     .navbar-header
@@ -31,32 +35,33 @@
               span.glyphicon.glyphicon-unchecked(ng-click='toggleAll()')
             th First
             th Last
-            th City
             th State
+            th Usage
             th Status
             th Ship Date
             th
             th
 
         tbody
-          tr(ng-repeat='account in accounts | filter:selectedCarrier | filter:searchText | orderBy:sortOrder')
-            td
+          tr(ng-repeat='(macAddress,stats) in stats', ng-init="account = customerAccountByMac[macAddress]")
+            td.am
               .checkbox(ng-if='account.gateways[0]', style='margin:0')
                 label
                   input(type='checkbox', ng-click='toggleChecked(account.gateways[0])', ng-checked='checked.indexOf(account.gateways[0]) != -1')
-            td: a(href='#/customer-accounts/{{ account._id }}') {{ account.name.first }}
-            td {{ account.name.last }}
-            td {{ account.city }}
-            td {{ account.state }}
-            td
+            td.am: a(href='#/customer-accounts/{{ account._id }}') {{ account.name.first }}
+            td.am {{ account.name.last }}
+            td.am {{ account.state }}
+            td.col-xs-2.am
+              rickshaw(rickshaw-options='histogramOptions', rickshaw-features='histogramFeatures', rickshaw-series='stats')
+            td.am
               select.form-control(ng-model='account.status', ng-options='status for status in accountStatuses')
-            td.col-xs-2
-              p.input-group
+            td.col-xs-2.am
+              p.input-group(style='margin-bottom:0')
                 input.form-control(type='text', datepicker-popup='', show-button-bar='false', ng-model='account.shipDate', is-open='openDatePickers[account._id]')
                 span.input-group-btn
                   button.btn.btn-default(ng-click='open( $event, account._id )')
                     i.glyphicon.glyphicon-calendar
-            td
+            td.am
               .btn-group
                 a.btn.btn-default.btn-xs(href='#/outbound-commands?customerAccount={{ account._id }}') Outbound
                 .btn-group(ng-if='account.gateways[0]')
@@ -78,4 +83,5 @@
                         span.glyphicon.glyphicon-check
                         |  Check for Google Drive backup
             td
-              a.btn.btn-link(ng-click='save(account)') Save
+              a.btn.btn-link(ng-click='save(account)', popover='Save changes to {{ account.name.first }} {{ account.name.last }}', popover-trigger='mouseenter')
+                i.glyphicon.glyphicon-floppy-disk

@@ -1,7 +1,7 @@
 define ['c/controllers', 's/carrier', 's/customeraccount', 's/notifier'], (controllers) ->
 	'use strict'
 
-	controllers.controller 'customeraccounts', ['$http', '$routeParams', '$scope', 'carrier', 'customeraccount', 'notifier', ($http, $routeParams, $scope, carrier, customerAccount, notifier) ->
+	controllers.controller 'customeraccounts', ['$filter', '$http', '$routeParams', '$scope', 'carrier', 'customeraccount', 'notifier', ($filter, $http, $routeParams, $scope, carrier, customerAccount, notifier) ->
 
     $scope.openDatePickers = {}
 
@@ -11,17 +11,36 @@ define ['c/controllers', 's/carrier', 's/customeraccount', 's/notifier'], (contr
       $scope.openDatePickers[accountId] = true
 
 
+    $scope.histogramOptions =
+      renderer  : 'bar'
+      height    : 20
+      width     : 150
+
+    $scope.histogramFeatures =
+      hover:
+        formatter: (series, x, y) ->
+          formattedDate = $filter( 'date' )( x, 'MMM dd' )
+
+          "#{y} page views<br><span class='date'>#{formattedDate}</span>"
+
+
     customerAccount.getAll {}, (data) ->
 
       $scope.accounts = data
 
-      $scope.customerNameByMac = {}
+      $scope.accountIds         = []
+      $scope.customerAccountByMac = {}
       data.forEach ( account ) ->
-        if mac = account.gateways[0]
-          @[account.gateways[0]] = "#{account.name.first} #{account.name.last}"
-      , $scope.customerNameByMac
+        $scope.accountIds.push account._id
+        @[account._id]  = account
+      , $scope.customerAccountByMac
 
-      $scope.customerName = ( mac ) -> $scope.customerNameByMac[mac]
+      query = '?accountIds=' + $scope.accountIds.join '&accountIds='
+      url   = '/api/google-analytics/page-views' + query
+
+      $http.get( url )
+        .success ( resp ) ->
+          $scope.stats  = resp
 
 
     carrier.getAll {}, (data) -> $scope.carriers = data
