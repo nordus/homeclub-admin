@@ -13,7 +13,7 @@ define ['c/controllers', 's/carrier', 's/customeraccount', 's/notifier'], (contr
 
     $scope.histogramOptions =
       renderer  : 'bar'
-      height    : 20
+      height    : 34
       width     : 150
 
     $scope.histogramFeatures =
@@ -21,7 +21,7 @@ define ['c/controllers', 's/carrier', 's/customeraccount', 's/notifier'], (contr
         formatter: (series, x, y) ->
           formattedDate = $filter( 'date' )( x, 'MMM dd' )
 
-          "#{y} page views<br><span class='date'>#{formattedDate}</span>"
+          "#{y} #{series.name}<br><span class='date'>#{formattedDate}</span>"
 
 
     customerAccount.getAll {}, (data) ->
@@ -30,8 +30,13 @@ define ['c/controllers', 's/carrier', 's/customeraccount', 's/notifier'], (contr
 
       $scope.accountIds         = []
       $scope.customerAccountByMac = {}
+      $scope.accountsWithShipDate = []
+      $scope.shipDates            = []
       data.forEach ( account ) ->
         $scope.accountIds.push account._id
+        if account.shipDate
+          $scope.accountsWithShipDate.push account._id
+          $scope.shipDates.push account.shipDate.split('T')[0]
         @[account._id]  = account
       , $scope.customerAccountByMac
 
@@ -42,6 +47,26 @@ define ['c/controllers', 's/carrier', 's/customeraccount', 's/notifier'], (contr
         .success ( resp ) ->
           $scope.stats  = resp
 
+      $scope.selectedAccountsUsageReportUrl = ->
+        query = '?accountIds=' + $scope.accountsWithShipDate.join '&accountIds='
+        query += '&startDates=' + $scope.shipDates.join '&startDates='
+
+        '/api/google-analytics/usage-report' + query
+
+
+    $scope.usageReportUrl = ( acct ) ->
+      query = "?accountIds=#{acct._id}&startDates=#{acct.shipDate.split('T')[0]}"
+      '/api/google-analytics/usage-report' + query
+
+    $scope.hasShipDate = ( acctId ) ->
+      $scope.accountsWithShipDate.indexOf( acctId ) isnt -1
+
+
+    $scope.warnIfNotAllAccountsHaveShipDate = ->
+      nbrOfAcctsWithoutShipDate = $scope.accounts.length - $scope.accountsWithShipDate.length
+      if nbrOfAcctsWithoutShipDate isnt 0
+        acctOrAccts = if nbrOfAcctsWithoutShipDate is 1 then 'account' else 'accounts'
+        notifier.info "#{nbrOfAcctsWithoutShipDate} #{acctOrAccts} with missing 'Ship Date' will not be included"
 
     carrier.getAll {}, (data) -> $scope.carriers = data
 
