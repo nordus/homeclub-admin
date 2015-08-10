@@ -21,13 +21,15 @@
       .page-header(style='margin-top:0; padding-top:0')
         h3(style='margin:15px 0 10px')
           | Download links&nbsp;
-          small(ng-show='reportParams.startDt && reportParams.endDt') {{ reportParams.startDt | date:'MMM d yyyy' }} - {{ reportParams.endDt | date:'MMM d yyyy' }}
+          small(ng-show='reportParams.startDt && reportParams.endDt') {{ reportParams.startDt | date:'MMM d yyyy' }}* - {{ reportParams.endDt | date:'MMM d yyyy' }}
+        p(ng-show='reportParams.startDt').help-block * test data prior to ship date(s) will not be included in reports
       .alert.alert-info(ng-hide='reportParams.startDt && reportParams.endDt') Please select start and end dates
       .list-group(ng-show='reportParams.startDt && reportParams.endDt')
         a(ng-href="{{ downloadUrlByMsgType('0') }}").list-group-item Download Network Hub Heartbeat report
         a(ng-href="{{ downloadUrlByMsgType('2') }}").list-group-item Download Network Hub Events report
         a(ng-href="{{ downloadUrlByMsgType('4') }}").list-group-item Download Sensor Hub Events report
         a(ng-href="{{ downloadUrlByMsgType('5') }}").list-group-item Download Sensor Hub Readings report
+        a(ng-href='/api/google-analytics/usage-report?startDates={{ reportParams.startDt }}&carrier={{ reportParams.carrier }}').list-group-item Download Customer Usage report
       .alert.alert-warning(ng-show='reportParams.startDt && reportParams.endDt')
         | Click&nbsp;
         a(href='https://docs.google.com/document/d/1qPN6elWmhzQT0NCroWrYrdReg8OdHmwVfByHDRVSgFE/pub', target='_') here
