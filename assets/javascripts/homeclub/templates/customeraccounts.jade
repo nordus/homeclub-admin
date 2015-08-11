@@ -1,5 +1,5 @@
 style.
-  .table > tbody > tr > td.am { vertical-align: middle }
+  .table > tbody > tr > td.am, .table > thead > tr > th.am, .am .label { vertical-align: middle }
 
 
 .navbar
@@ -41,9 +41,14 @@ style.
             th First
             th Last
             th State
-            th
+            th.am
               i.icon-eye.muted
               |  Usage
+              | &nbsp;&nbsp;
+              small.muted
+                span.label(style='background-color:#53b2da') web
+                |  /&nbsp;
+                span.label(style='background-color:#ff8000') mobile
             th Status
             th Ship Date
             th
