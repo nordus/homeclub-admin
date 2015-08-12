@@ -31,3 +31,7 @@
           .well.ac
             h4 {{ aggregates.outboundSms }}
             .text-muted SMS Alerts
+        .col-xs-4
+          .well.ac(style='padding:5px 5px 19px')
+            rickshaw(rickshaw-options='histogramOptions', rickshaw-features='histogramFeatures', rickshaw-series='stats')
+            .text-muted Usage

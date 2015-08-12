@@ -1,3 +1,6 @@
+style.
+  .table > tbody > tr > td.am, .table > thead > tr > th.am, .am .label { vertical-align: middle }
+
 .container
 
   include _filtercontrolswithcarrierselect
@@ -12,12 +15,24 @@
             th Last
             th City
             th State
+            th.am
+              i.icon-eye.muted
+              |  Usage
+              | &nbsp;&nbsp;
+              small.muted
+                span.label(style='background-color:#53b2da') web
+                |  /&nbsp;
+                span.label(style='background-color:#ff8000') mobile
+            th Ship Date
             th
 
         tbody
           tr(ng-repeat='account in accounts | filter:searchText | orderBy:sortOrder')
-            td: a(href='#/customer-accounts/{{ account._id }}') {{ account.name.first }}
-            td {{ account.name.last }}
-            td {{ account.city }}
-            td {{ account.state }}
-            td: a: i.icon-trashcan
+            td.am: a(href='#/customer-accounts/{{ account._id }}') {{ account.name.first }}
+            td.am {{ account.name.last }}
+            td.am {{ account.city }}
+            td.am {{ account.state }}
+            td.col-xs-2.am
+              rickshaw(rickshaw-options='histogramOptions', rickshaw-features='histogramFeatures', rickshaw-series='stats[account._id]')
+            td.am {{ account.shipDate | date:'MMM dd, yyyy' }}
+            td.am: a: i.icon-trashcan

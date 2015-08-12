@@ -1,8 +1,31 @@
 define ['carrier/controllers/controllers', 'carrier/services/customeraccount'], (controllers) ->
 	'use strict'
 
-	controllers.controller 'customeraccounts', ['$rootScope', '$routeParams', '$scope', 'customeraccount', ($rootScope, $routeParams, $scope, customerAccount) ->
-    customerAccount.getAll {}, (data) -> $scope.accounts = data
+	controllers.controller 'customeraccounts', ['$http', '$rootScope', '$routeParams', '$scope', 'customeraccount', ($http, $rootScope, $routeParams, $scope, customerAccount) ->
+    customerAccount.getAll {}, (data) ->
+      $scope.accounts = data
+
+      $scope.accountIds = data.map ( account ) -> account._id
+
+      query = '?accountIds=' + $scope.accountIds.join '&accountIds='
+      url   = '/api/google-analytics/page-views' + query
+
+      $http.get( url )
+        .success ( resp ) ->
+
+          $scope.stats  = resp
+
+          $scope.histogramOptions =
+            renderer  : 'bar'
+            height    : 34
+            width     : 150
+
+          $scope.histogramFeatures =
+            hover:
+              formatter: (series, x, y) ->
+                formattedDate = $filter( 'date' )( x, 'MMM dd' )
+
+                "#{y} #{series.name}<br><span class='date'>#{formattedDate}</span>"
 
     #carrier.getAll {}, (data) -> $scope.carriers = data
 
