@@ -24,15 +24,13 @@ style.
                 |  /&nbsp;
                 span.label(style='background-color:#ff8000') mobile
             th Ship Date
-            th
 
         tbody
           tr(ng-repeat='account in accounts | filter:searchText | orderBy:sortOrder')
-            td.am: a(href='#/customer-accounts/{{ account._id }}') {{ account.name.first }}
+            td.am {{ account.name.first }}
             td.am {{ account.name.last }}
             td.am {{ account.city }}
             td.am {{ account.state }}
             td.col-xs-2.am
               rickshaw(rickshaw-options='histogramOptions', rickshaw-features='histogramFeatures', rickshaw-series='stats[account._id]')
             td.am {{ account.shipDate | date:'MMM dd, yyyy' }}
-            td.am: a: i.icon-trashcan

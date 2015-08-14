@@ -10,7 +10,7 @@
         tr
           th Account
           th Network Hub
-          th Sensor Hubs
+          th Sensors
         tr(ng-repeat='(macAddress,hubTypes) in histograms')
           td
             a(href="#/customer-accounts/{{ macAddress.split('|')[2] }}/gateways/{{ macAddress.split('|')[0] }}", title="NH MAC: {{ macAddress.split('|')[0] }}") {{ macAddress.split('|')[1] }}
