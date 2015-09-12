@@ -1,0 +1,19 @@
+.container
+  form.form-horizontal(name='newCarrierAdminForm', ng-submit='save()')
+    .row
+      .col-xs-12
+        .col-xs-12.page-header
+          h3.pull-left(style='margin:0 0 15px')
+            a(href='#/users/{{ user._id }}') {{ user.email }}
+            |  /
+            | Add Carrier Admin
+
+          .pull-right(style='margin:0')
+            button.btn.btn-warning(type='submit') Save
+
+    .form-group
+      .col-xs-6
+        .col-xs-6
+          input.form-control(ng-model='carrierAdmin.name.first', type='text', placeholder='First name')
+        .col-xs-6
+          input.form-control(ng-model='carrierAdmin.name.last', type='text', placeholder='Last name')
