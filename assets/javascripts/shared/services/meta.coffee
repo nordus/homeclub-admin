@@ -1,7 +1,7 @@
-define ['ng', 's/services'], (angular, services) ->
+define ['ng', 'shared/services/sharedservices'], (angular, sharedservices) ->
 	'use strict'
 
-	services.factory 'meta', [->
+	sharedservices.factory 'meta', [->
 
 		{
       "sensorHubTypes": {
