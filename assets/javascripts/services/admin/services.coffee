@@ -1,4 +1,4 @@
-define ['ng'], (angular) ->
+define ['ng', 'shared/services/sharedservices'], (angular) ->
 	'use strict'
 
-	angular.module 'services', []
+	angular.module 'services', ['sharedservices']

@@ -1,3 +1,3 @@
-define ['ng'], (angular) ->
+define ['ng', 'shared/services/sharedservices'], (angular) ->
   
-  angular.module 'services', []
+  angular.module 'services', ['sharedservices']

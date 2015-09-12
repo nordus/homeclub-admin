@@ -1,4 +1,4 @@
-define ['c/controllers', 'homeclub/services/histogram', 's/meta', 's/sensorhub'], (controllers) ->
+define ['c/controllers', 'homeclub/services/histogram', 'shared/services/meta', 's/sensorhub'], (controllers) ->
 
   controllers.controller 'connectivity', ['$filter', '$rootScope', '$scope', 'histogram', 'meta', 'sensorhub', ($filter, $rootScope, $scope, histogram, meta, sensorhub) ->
 

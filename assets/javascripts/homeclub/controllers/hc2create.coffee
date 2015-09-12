@@ -1,4 +1,4 @@
-define ['ng', 'c/controllers', 's/customeraccount', 's/gateway', 's/sensorhub', 's/meta', 's/notifier'], (angular, controllers) ->
+define ['ng', 'c/controllers', 's/customeraccount', 's/gateway', 's/sensorhub', 'shared/services/meta', 's/notifier'], (angular, controllers) ->
 
   controllers.controller 'hc2create', ['$http', '$scope', 'customeraccount', 'gateway', 'meta', 'notifier', 'sensorhub', ($http, $scope, customeraccount, gateway, meta, notifier, sensorhub) ->
 

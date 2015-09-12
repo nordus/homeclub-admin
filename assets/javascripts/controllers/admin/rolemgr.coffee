@@ -22,7 +22,7 @@ define ['s/customeraccount', 's/user', 's/notifier', 's/homeclubadmin', 's/carri
 
         deleteRecordAndAssociation = (record) =>
           console.log record
-          return unless confirm("Are you sure you want to delete #{record.name.first} #{record.name.last}")
+          return unless confirm("Are you sure you want to delete #{record.name.first} #{record.name.last}?")
           record.$delete =>
             delete user.roles[role]
             user.$update =>

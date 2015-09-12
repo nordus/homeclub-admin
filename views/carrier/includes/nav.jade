@@ -11,19 +11,11 @@ nav.navbar.navbar-default(ng-controller='nav')
         li(ng-class="{active: isActive('/dashboard')}"): a(href='#/dashboard') Dashboard
         li(ng-class="{active: isActive('/carrier-admins')}"): a(href='#/carrier-admins') Admins
         li(ng-class="{active: isActive('/customer-accounts')}"): a(href='#/customer-accounts') Customers
+        li(ng-class="{active: isActive('/users')}"): a(href='#/users') Users
         li(ng-class="{active: isActive('/reports')}"): a(href='#/reports') Reports
         li(ng-class="{active: isActive('/connectivity')}"): a(href='#/connectivity') Connectivity
 
       ul.nav.navbar-nav.navbar-right
-        li.dropdown
-          a.dropdown-toggle(data-toggle='dropdown')
-            | Add new
-            b.caret
-          ul.dropdown-menu
-            // li: a Customer
-            li: a Admin
-            // li.divider
-            // li(ng-class="{active: isActive('/import')}"): a(href='#/import') Import
         li.dropdown
           a.dropdown-toggle(data-toggle='dropdown')
             | {{ currentUser.name.first || currentUser.user.email }}

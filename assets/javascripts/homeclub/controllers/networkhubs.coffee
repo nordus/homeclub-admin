@@ -1,4 +1,4 @@
-define ['c/controllers', 's/customeraccount', 's/gateway', 's/notifier', 's/sensorhub', 's/meta'], (controllers) ->
+define ['c/controllers', 's/customeraccount', 's/gateway', 's/notifier', 's/sensorhub', 'shared/services/meta'], (controllers) ->
 
   controllers.controller 'networkhubs', ['$scope', 'customeraccount', 'gateway', 'notifier', 'sensorhub', 'meta', ($scope, customeraccount, gateway, notifier, sensorhub, meta) ->
 

@@ -30,21 +30,22 @@ require ['admin-requirejs-config'], ->
     'c/usershow'
     'filters'
     'bootstrap'
+    'shared/services/auth-token'
+    'shared/services/auth-interceptor'
   ], (angular, app, templates) ->
 
     rp = ($routeProvider) ->
 
       auth =
-        isLoggedIn: ['$http', '$q', '$rootScope', ($http, $q, $rootScope) ->
+        isLoggedIn: ['$http', '$rootScope', 'AuthTokenFactory', ($http, $rootScope, AuthTokenFactory) ->
           return true if $rootScope.currentUser
-          dfd = $q.defer()
           $http.get('/api/me/home-club-admin')
             .success (data) ->
-              $rootScope.currentUser = data
-              dfd.resolve true
+              $rootScope.currentUser = data.account
+              AuthTokenFactory.setToken data.token
+              return true
             .error ->
               location.href = '/login'
-          dfd.promise
         ]
 
       $routeProvider
@@ -167,5 +168,11 @@ require ['admin-requirejs-config'], ->
           redirectTo  : '/dashboard'
 
     app.config ['$routeProvider', '$httpProvider', rp]
+
+    app.config [
+      '$httpProvider'
+      ( $httpProvider ) ->
+        $httpProvider.interceptors.push 'AuthInterceptor'
+    ]
 
     angular.bootstrap document, ['app']

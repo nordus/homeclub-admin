@@ -21,4 +21,4 @@
               .btn-group(ng-repeat='(roleKey, roleValue) in user.roles')
                 a.btn.btn-xs.btn-default(href='#/{{ roleKey | dasherize }}s/{{ roleValue }}') {{ roleKey }}
                 a.btn.btn-xs.btn-default(ng-click='roleMgr.deleteRole(user._id, roleKey, roleValue)'): i.icon-trashcan
-            td: a(title='Delete {{ user.email }}'): i.icon-trashcan
+            td: a(ng-click='delete( user )', title='Delete {{ user.email }}'): i.icon-trashcan

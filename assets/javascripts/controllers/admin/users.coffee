@@ -1,8 +1,16 @@
 define ['c/controllers', 'c/rolemgr', 's/user'], (controllers, RoleMgr) ->
 
-	controllers.controller 'users', ['$controller', '$scope', 'user', ($controller, $scope, user) ->
-    user.getAll {}, (data) -> $scope.users = data
+	controllers.controller 'users', ['$controller', '$location', '$scope', 'notifier', 'user', ($controller, $location, $scope, notifier, user) ->
+#    user.getAll {}, (data) -> $scope.users = data
+    $scope.users = user.query()
 
+    $scope.delete = ( user ) ->
+      if confirm "Are you sure you want to delete #{user.email}?"
+        user.$delete ->
+          notifier.success 'Deleted!'
+          $scope.users = $scope.users.filter ( u ) -> u._id != user._id
+
+    # handles deleting / disassociating role
     $scope.roleMgr = $controller RoleMgr,
       $scope: $scope.$new()
 

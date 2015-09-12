@@ -32,6 +32,7 @@ require [
   'ng'
   'carrier/carrier-app'
   'carrier-templates'
+  'carrier/controllers/carrieradmincreate'
   'carrier/controllers/carrieradmins'
   'carrier/controllers/carrieradminshow'
   'carrier/controllers/connectivity'
@@ -41,18 +42,23 @@ require [
   'carrier/controllers/nav'
   'carrier/controllers/dashboard'
   'carrier/controllers/reports'
+  'carrier/controllers/users'
+  'carrier/controllers/usershow'
   'bootstrap'
+  'shared/services/auth-token'
+  'shared/services/auth-interceptor'
 ], (angular, app, templates) ->
   
   rp = ($routeProvider, $httpProvider) ->
     
     auth =
-      isLoggedIn: ['$http', '$q', '$rootScope', ($http, $q, $rootScope) ->
+      isLoggedIn: ['$http', '$q', '$rootScope', 'AuthTokenFactory', ($http, $q, $rootScope, AuthTokenFactory) ->
         return true if $rootScope.currentUser
         dfd = $q.defer()
         $http.get('/api/me/carrier-admin')
           .success (data) ->
-            $rootScope.currentUser = data
+            $rootScope.currentUser = data.account
+            AuthTokenFactory.setToken data.token
             dfd.resolve true
           .error ->
             location.href = '/login'
@@ -108,11 +114,32 @@ require [
             when '4' then templates.reportssensoralerts()
             when '2' then templates.reportshomebasealerts()
         resolve     : auth
-        
+
+      .when '/users/:id/carrier-admin/create',
+        controller: 'carrieradmincreate'
+        template: templates.carrieradmincreate
+        resolve: auth
+
+      .when '/users/:id',
+        controller: 'usershow'
+        template: templates.usershow
+        resolve: auth
+
+      .when '/users',
+        controller  : 'users'
+        template    : templates.users
+        resolve     : auth
+
       .otherwise
         redirectTo  : '/dashboard'
 
   app.config ['$routeProvider', '$httpProvider', rp]
+
+  app.config [
+    '$httpProvider'
+    ( $httpProvider ) ->
+      $httpProvider.interceptors.push 'AuthInterceptor'
+  ]
 
   app.filter 'fahrenheit', ->
     (num) ->

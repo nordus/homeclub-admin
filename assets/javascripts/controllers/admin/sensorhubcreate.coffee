@@ -1,4 +1,4 @@
-define ['c/controllers', 's/gateway', 's/sensorhub', 's/meta'], (controllers) ->
+define ['c/controllers', 's/gateway', 's/sensorhub', 'shared/services/meta'], (controllers) ->
 
   controllers.controller 'sensorhubcreate', ['$location', '$routeParams', '$scope', 'meta', 'notifier', 'gateway', 'sensorhub', ($location, $routeParams, $scope, meta, notifier, gateway, sensorhub) ->
     $scope.meta = meta
