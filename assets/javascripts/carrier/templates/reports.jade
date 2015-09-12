@@ -30,7 +30,7 @@
         a(ng-href="{{ downloadUrlByMsgType('4') }}").list-group-item Download Sensor events report
         a(ng-href="{{ downloadUrlByMsgType('5') }}").list-group-item Download Sensor readings report
         a(ng-href='/api/google-analytics/usage-report?startDates={{ reportParams.startDt }}&carrier={{ reportParams.carrier }}').list-group-item Download customer web / mobile usage report
-      .alert.alert-warning(ng-show='reportParams.startDt && reportParams.endDt')
-        | Click&nbsp;
-        a(href='https://docs.google.com/document/d/1qPN6elWmhzQT0NCroWrYrdReg8OdHmwVfByHDRVSgFE/pub', target='_') here
-        | &nbsp;for data dictionary
+      .alert.alert-warning
+        | Click
+        a(href='https://drive.google.com/a/senteri.com/file/d/0B2Iy-q3TnvS7UmlDSVlfMUFfdGs/view?usp=sharing', target='_')  here
+        |  for data dictionary
