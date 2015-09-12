@@ -1,0 +1,19 @@
+.container
+
+  .row
+    .col-xs-12
+      table.table
+        thead
+          tr
+            th Email
+            th Created
+            th Roles
+
+        tbody
+          tr(ng-repeat='user in users | filter:searchText | orderBy:sortOrder')
+            td
+              a(href='#/users/{{ user._id }}') {{ user.email }}
+            td {{ user.createdAt | date:'MMM d, yyyy' }}
+            td
+              .btn-group(ng-repeat='(roleKey, roleValue) in user.roles')
+                a.btn.btn-xs.btn-default(href='#/{{ roleKey | dasherize }}s/{{ roleValue }}') {{ roleKey }}

@@ -1,0 +1,23 @@
+.container
+  .row
+    .col-xs-12.page-header
+
+      h3.pull-left(style='margin:0 0 15px')
+        a(href='#/users') Users
+        |  /
+        | {{ user.email }}
+
+      form.navbar-form.navbar-right(style='margin:0')
+        a.btn.btn-default.disabled(ng-show='user.roles.customerAccount')
+          i.glyphicon.glyphicon-ok
+          |  Customer Account
+        a.btn.btn-success(ng-hide='user.roles.customerAccount', href="#/users/{{ user._id }}/customer-account/create") Add Customer Account
+
+        a.btn.btn-default.disabled(ng-show='user.roles.carrierAdmin')
+          i.glyphicon.glyphicon-ok
+          |  Carrier Admin
+        a.btn.btn-success(ng-hide='user.roles.carrierAdmin', href="#/users/{{ user._id }}/carrier-admin/create") Add Carrier Admin
+
+  .row
+    .col-xs-12
+      pre {{ user | json }}
