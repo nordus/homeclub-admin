@@ -14,7 +14,6 @@ requirejs.config
     d3          : 'vendor/d3/d3'
     rickshaw    : 'vendor/rickshaw/rickshaw.min'
     'angular-rickshaw': 'angular-rickshaw.min'
-    'ui-bootstrap'    : 'ui-bootstrap-custom-0.13.0'
     'ui-bootstrap-tpls' : 'ui-bootstrap-custom-tpls-0.13.0'
 
   shim:
@@ -31,5 +30,4 @@ requirejs.config
       deps: ['d3']
     'angular-rickshaw':
       deps: ['ng', 'd3', 'rickshaw']
-    'ui-bootstrap'  : ['ng']
     'ui-bootstrap-tpls' : ['ng']
