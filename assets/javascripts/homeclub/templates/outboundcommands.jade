@@ -15,7 +15,7 @@
             th
 
         tbody
-          tr(ng-repeat='ob in outboundCommands| filter:selectedCarrier | filter:searchText | orderBy:sortOrder')
+          tr(ng-repeat='ob in outboundCommands| filter:{carrier:selectedCarrier||undefined} | filter:searchText | orderBy:sortOrder')
             td {{ ob.sentAt | date:'MMM dd, h:mm a' }}
             td {{ ob.deliveredAt | date:'h:mm a' }}
             td.text-success {{ ob.resolvedAt | date:'h:mm a' }}

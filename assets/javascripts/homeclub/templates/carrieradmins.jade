@@ -13,7 +13,7 @@
             th
 
         tbody
-          tr(ng-repeat='admin in admins | filter:selectedCarrier | filter:searchText | orderBy:sortOrder')
+          tr(ng-repeat='admin in admins | filter:{carrier:selectedCarrier||undefined} | filter:searchText | orderBy:sortOrder')
             td: a(ng-click='show(admin._id)') {{ admin.name.first }}
             td {{ admin.name.last }}
             td: a: i.icon-trashcan
