@@ -55,7 +55,7 @@ style.
             th
 
         tbody
-          tr(ng-repeat='(macAddress,stats) in stats', ng-init="account = customerAccountByMac[macAddress]")
+          tr(ng-repeat='account in accounts | filter:{carrier:selectedCarrier||undefined} | filter:searchText | orderBy:sortOrder')
             td.am
               .checkbox(ng-if='account.gateways[0]', style='margin:0')
                 label
@@ -64,7 +64,7 @@ style.
             td.am {{ account.name.last }}
             td.am {{ account.state }}
             td.col-xs-2.am
-              rickshaw(rickshaw-options='histogramOptions', rickshaw-features='histogramFeatures', rickshaw-series='stats')
+              rickshaw(rickshaw-options='histogramOptions', rickshaw-features='histogramFeatures', rickshaw-series='stats[account._id]')
             td.am
               select.form-control(ng-model='account.status', ng-options='status for status in accountStatuses')
             td.col-xs-2.am
