@@ -13,7 +13,7 @@ define ['c/controllers', 's/aggregates'], (controllers) ->
 
         $scope.histogramOptions =
           renderer  : 'bar'
-          height    : 53
+          height    : 39
 
         $scope.histogramFeatures =
           hover:

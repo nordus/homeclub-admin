@@ -2,13 +2,16 @@ style.
   input.ng-invalid.ng-touched { border-color:#a94442; }
 
 
+.navbar
+  .container.subnav
+    .navbar-header
+      .navbar-brand Send HC2
+
+    form.navbar-form.navbar-right(style='margin:0')
+      .form-group
+        a.btn.btn-primary(ng-hide='sending', ng-click='send()', ng-disabled='hc2Form.$invalid || !recipients.length || sending') Send &rarr;
+
 .container
-  .row
-    .col-xs-12.page-header
-      h3.pull-left(style='margin:0 0 15px') Send HC2
-      form.navbar-form.navbar-right(style='margin:0')
-        .form-group
-          a.btn.btn-primary(ng-hide='sending', ng-click='send()', ng-disabled='hc2Form.$invalid || !recipients.length || sending') Send &rarr;
   .row
     .col-xs-6
       form(name='hc2Form')

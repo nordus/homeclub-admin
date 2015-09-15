@@ -1,5 +1,6 @@
-.container
+include _subnav
 
+.container
   .row
     .col-xs-12
       table.table
@@ -12,10 +13,10 @@
             th
 
         tbody
-          tr(ng-repeat='sms in outboundSms')
+          tr(ng-repeat='sms in outboundSms | filter:searchText | orderBy:sortOrder')
             td {{ sms.created | date:'short' }}
             td {{ sms.reading.updateTime | date:'short' }}
-            td {{ formattedNames[sms._id] }}
+            td {{ formattedNames[sms.customerAccount] }}
             td {{ sms.reading.msgType }}
             td
               a.btn.btn-xs.btn-default(data-toggle='collapse', ng-href='#{{ sms._id }}') reading

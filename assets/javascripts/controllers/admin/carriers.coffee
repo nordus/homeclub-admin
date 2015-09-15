@@ -4,7 +4,8 @@ define ['c/controllers', 's/carrier'], (controllers) ->
 	controllers.controller 'carriers', ['$scope', 'carrier', ($scope, carrier) ->
     carrier.getAll {}, (data) -> $scope.carriers = data
 
-    $scope.title = 'Carriers'
+    $scope.breadcrumb =
+      title : 'Carriers'
 
     $scope.sortOptions = [
         value: 'name', title: 'Sort by Name'

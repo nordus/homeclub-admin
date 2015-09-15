@@ -14,7 +14,8 @@ define ['c/controllers', 'c/rolemgr', 's/user'], (controllers, RoleMgr) ->
     $scope.roleMgr = $controller RoleMgr,
       $scope: $scope.$new()
 
-    $scope.title = 'Users'
+    $scope.breadcrumb =
+      title: 'Users'
 
     $scope.sortOptions = [
       value: 'email', title: 'Sort by Email'

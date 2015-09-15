@@ -5,20 +5,18 @@ style.
     white-space: nowrap;
   }
 
+.navbar
+  .container.subnav
+    .navbar-header
+      .navbar-brand Customer Account import
+
 .container
-
-  .row
-    .col-xs-12.page-header
-  
-      h3.pull-left(style='margin:0 0 15px') Customer Account import
-
   .row
     .col-xs-6
       form(name='importForm')
         .form-group
           select.form-control(ng-model='selectedCarrier', ng-options='c._id as c.name for c in carriers')
         .form-group(ng-class="{ 'has-error':importForm.spreadsheetKey.$error.minlength || importForm.spreadsheetKey.$error.maxlength }")
-          //input.form-control(type='url', ng-model='url', placeholder='Google Doc Url', required)
           input.form-control(name='spreadsheetKey', ng-model='spreadsheetKey', ng-minlength='44', ng-maxlength='44', placeholder='Spreadsheet Key (i.e. 1Q5Dk_jFqGpHtV54hlHQgamkpbckiC4ObQkXybTvowhg)', required)
           p.help-block(ng-if='importForm.spreadsheetKey.$error.minlength')
             | .. too short (should be 44 characters)

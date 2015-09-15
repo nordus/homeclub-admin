@@ -1,10 +1,13 @@
+.navbar
+  .container.subnav
+    .navbar-header
+      .navbar-brand Send HC1
+
+    form.navbar-form.navbar-right(style='margin:0')
+      .form-group
+        a.btn.btn-primary(ng-click='send()') Send &rarr;
+
 .container
-  .row
-    .col-xs-12.page-header
-      h3.pull-left(style='margin:0 0 15px') Send HC1
-      form.navbar-form.navbar-right(style='margin:0')
-        .form-group
-          a.btn.btn-primary(ng-click='send()') Send &rarr;
   .row
     .col-xs-6
       form(name='hc1Form')

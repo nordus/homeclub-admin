@@ -20,7 +20,8 @@ define ['c/controllers', 's/customeraccount', 's/gateway', 's/notifier', 's/sens
           @[c._id] = "#{c.name.first} #{c.name.last} (..#{c._id.substr(-4)})"
         , $scope.customerNames
 
-    $scope.title = 'Network Hubs'
+    $scope.breadcrumb =
+      title : 'Network Hubs'
 
     $scope.sortOptions = [
       value: 'customerAccount', title: 'Sort by Customer'
