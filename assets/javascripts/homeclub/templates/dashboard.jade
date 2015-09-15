@@ -1,11 +1,15 @@
+style.
+  .well.ac { min-height:119px }
+
+
+.navbar
+  .container.subnav
+    .navbar-header
+      .navbar-brand Dashboard
+
 .container
   .row
-    .col-xs-12.page-header
-
-      h3.pull-left(style='margin:0 0 15px') Dashboard
-
-  .row
-    .col-xs-6
+    .col-xs-12.col-sm-9
       .row
         .col-xs-4
           .well.ac
@@ -21,7 +25,7 @@
             .text-muted HomeBases
 
   .row
-    .col-xs-6
+    .col-xs-12.col-sm-9
       .row
         .col-xs-4
           .well.ac
@@ -32,6 +36,6 @@
             h4 {{ aggregates.outboundSms }}
             .text-muted SMS Alerts
         .col-xs-4
-          .well.ac(style='padding:5px 5px 19px')
+          .well.ac
             rickshaw(rickshaw-options='histogramOptions', rickshaw-features='histogramFeatures', rickshaw-series='stats')
             .text-muted Usage
