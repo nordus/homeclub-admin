@@ -1,6 +1,6 @@
-define ['carrier/controllers/controllers', 'carrier/services/search', 'carrier/services/buildurl'], (controllers) ->
+define ['carrier/controllers/controllers', 'carrier/services/search', 'carrier/services/buildurl', 'shared/services/auth-token'], (controllers) ->
 
-	controllers.controller 'reports', ['$location', '$rootScope', '$scope', 'search', 'buildurl', ($location, $rootScope, $scope, search, buildurl) ->
+	controllers.controller 'reports', ['$location', '$rootScope', '$scope', 'search', 'buildurl', 'AuthTokenFactory', ($location, $rootScope, $scope, search, buildurl, AuthTokenFactory) ->
 
 #	  $scope.searchParams =
 #	    carrier     : $rootScope.currentUser.carrier._id
@@ -35,11 +35,14 @@ define ['carrier/controllers/controllers', 'carrier/services/search', 'carrier/s
 #        getStatResults()
 #        getSearchResults()
 
+    $scope.token  = AuthTokenFactory.getToken()
+
     $scope.reportParams =
       carrier : $rootScope.currentUser.carrier._id
       endDt     : new Date()
       fields  : ['sensorHubData1', 'sensorHubData2', 'sensorHubData3']
       startDt   : undefined
+      token     : $scope.token
 
     $scope.downloadUrlByMsgType = (msgType) ->
       paramsToMerge = { msgType:msgType, download:'true', limit:5000000 }

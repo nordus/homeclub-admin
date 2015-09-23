@@ -29,7 +29,7 @@
         a(ng-href="{{ downloadUrlByMsgType('2') }}").list-group-item Download Network Hub events report
         a(ng-href="{{ downloadUrlByMsgType('4') }}").list-group-item Download Sensor events report
         a(ng-href="{{ downloadUrlByMsgType('5') }}").list-group-item Download Sensor readings report
-        a(ng-href='/api/google-analytics/usage-report?startDates={{ reportParams.startDt }}&carrier={{ reportParams.carrier }}').list-group-item Download customer web / mobile usage report
+        a(ng-href='/api/google-analytics/usage-report?startDates={{ reportParams.startDt }}&carrier={{ reportParams.carrier }}&token={{ token }}').list-group-item Download customer web / mobile usage report
       .alert.alert-warning
         | Click
         a(href='https://drive.google.com/a/senteri.com/file/d/0B2Iy-q3TnvS7UmlDSVlfMUFfdGs/view?usp=sharing', target='_')  here
