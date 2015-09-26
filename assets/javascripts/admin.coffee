@@ -28,10 +28,7 @@ require ['admin-requirejs-config'], ->
     'c/sensorhubcreate'
     'c/users'
     'c/usershow'
-    'filters'
     'bootstrap'
-    'shared/services/auth-token'
-    'shared/services/auth-interceptor'
   ], (angular, app, templates) ->
 
     rp = ($routeProvider) ->

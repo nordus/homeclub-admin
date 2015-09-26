@@ -45,12 +45,10 @@ require [
   'carrier/controllers/users'
   'carrier/controllers/usershow'
   'bootstrap'
-  'shared/services/auth-token'
-  'shared/services/auth-interceptor'
 ], (angular, app, templates) ->
-  
-  rp = ($routeProvider, $httpProvider) ->
-    
+
+  rp = ($routeProvider) ->
+
     auth =
       isLoggedIn: ['$http', '$q', '$rootScope', 'AuthTokenFactory', ($http, $q, $rootScope, AuthTokenFactory) ->
         return true if $rootScope.currentUser
@@ -133,7 +131,7 @@ require [
       .otherwise
         redirectTo  : '/dashboard'
 
-  app.config ['$routeProvider', '$httpProvider', rp]
+  app.config ['$routeProvider', rp]
 
   app.config [
     '$httpProvider'
