@@ -8,28 +8,28 @@
   .row
     .col-xs-6
       form(name='reportsForm')
-        .form-group.col-xs-6(ng-class="{'has-error': !reportParams.startDt}")
+        .form-group.col-xs-6(ng-class="{'has-error': !reportParams.start}")
           label(for='start').control-label Start
-          input(type='date', max="{{ reportParams.endDt | date:'yyyy-MM-dd' }}", ng-model='reportParams.startDt', id='start', required).form-control
-          p(ng-hide='reportParams.startDt').help-block Please enter start date
-        .form-group.col-xs-6(ng-class="{'has-error': !reportParams.endDt}")
+          input(type='date', max="{{ reportParams.end | date:'yyyy-MM-dd' }}", ng-model='reportParams.start', id='start', required).form-control
+          p(ng-hide='reportParams.start').help-block Please enter start date
+        .form-group.col-xs-6(ng-class="{'has-error': !reportParams.end}")
           label(for='end').control-label End
-          input(type='date', ng-model='reportParams.endDt', id='end', required).form-control
-          p(ng-hide='reportParams.endDt').help-block Please enter end date
+          input(type='date', ng-model='reportParams.end', id='end', required).form-control
+          p(ng-hide='reportParams.end').help-block Please enter end date
   .row
     .col-xs-6
       .page-header(style='margin-top:0; padding-top:0')
         h3(style='margin:15px 0 10px')
           | Download links&nbsp;
-          small(ng-show='reportParams.startDt && reportParams.endDt') {{ reportParams.startDt | date:'MMM d yyyy' }}* - {{ reportParams.endDt | date:'MMM d yyyy' }}
-        p(ng-show='reportParams.startDt').help-block * test data prior to ship date(s) will not be included in reports
-      .alert.alert-info(ng-hide='reportParams.startDt && reportParams.endDt') Please select start and end dates
-      .list-group(ng-show='reportParams.startDt && reportParams.endDt')
+          small(ng-show='reportParams.start && reportParams.end') {{ reportParams.start | date:'MMM d yyyy' }}* - {{ reportParams.end | date:'MMM d yyyy' }}
+        p(ng-show='reportParams.start').help-block * test data prior to ship date(s) will not be included in reports
+      .alert.alert-info(ng-hide='reportParams.start && reportParams.end') Please select start and end dates
+      .list-group(ng-show='reportParams.start && reportParams.end')
         a(ng-href="{{ downloadUrlByMsgType('0') }}").list-group-item Download Network Hub heartbeat report
         a(ng-href="{{ downloadUrlByMsgType('2') }}").list-group-item Download Network Hub events report
         a(ng-href="{{ downloadUrlByMsgType('4') }}").list-group-item Download Sensor events report
         a(ng-href="{{ downloadUrlByMsgType('5') }}").list-group-item Download Sensor readings report
-        a(ng-href='/api/google-analytics/usage-report?startDates={{ reportParams.startDt }}&carrier={{ reportParams.carrier }}&token={{ token }}').list-group-item Download customer web / mobile usage report
+        a(ng-href='/api/google-analytics/usage-report?startDates={{ reportParams.start }}&token={{ token }}').list-group-item Download customer web / mobile usage report
       .alert.alert-warning
         | Click
         a(href='https://drive.google.com/a/senteri.com/file/d/0B2Iy-q3TnvS7UmlDSVlfMUFfdGs/view?usp=sharing', target='_')  here
